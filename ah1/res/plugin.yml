@@ -9,5 +9,5 @@ commands:
     description: contains gamemode commands
   advert:
     description: adverts a message globally
-  example:
+  createchunk:
     description: test
