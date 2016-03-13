@@ -80,7 +80,7 @@ public class AHDatabase {
 
     /**
      *
-     * @return connection - The connection object that's been intialized in this class
+     * @return connection - The connection object that's been initialized in this class
      */
     public Connection getConnection() {
         return connection;
