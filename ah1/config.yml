@@ -1,0 +1,12 @@
+database:
+  sqlite:
+    enabled: true
+    database: test-db.db
+  mysql:
+    enabled: false
+    credentials:
+      username: AH1
+      password: Peanut
+      database: AH1
+      ip: 127.0.0.1
+      port: 3306
