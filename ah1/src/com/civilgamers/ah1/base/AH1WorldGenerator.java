@@ -24,5 +24,4 @@ public class AH1WorldGenerator extends ChunkGenerator {
         // set the block (look above, how this is done)
         result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
     }
-
 }

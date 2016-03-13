@@ -4,6 +4,9 @@ import java.util.logging.Logger;
 
 import com.civilgamers.ah1.commands.Commands;
 import com.civilgamers.ah1.databases.AHDatabase;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -39,8 +42,17 @@ public class AH1 extends JavaPlugin implements Listener {
     public void init() {
         //database.connect();
         getCommand("ah").setExecutor(commands);
-        getCommand("help").setExecutor(commands);
+        getCommand("advert").setExecutor(commands);
         getCommand("example").setExecutor(commands);
+        Location loc = getServer().getWorld("world").getSpawnLocation();
+        Location tempLoc = loc.clone();
+        for(int x = 0; x < 16; x++){
+            for(int i = 0; i < 16; i++) {
+                tempLoc.setX((loc.getX() + x) - 8);
+                tempLoc.setY((loc.getY() + i) - 8);
+                tempLoc.getBlock().setType(Material.GRASS);
+            }
+        }
     }
 
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
@@ -56,4 +68,6 @@ public class AH1 extends JavaPlugin implements Listener {
     public AHDatabase getAHDatabase() {
         return database;
     }
+
+
 }

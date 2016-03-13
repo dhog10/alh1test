@@ -1,6 +1,7 @@
-name: Test
+name: AH1
 version: 1.0
 main: com.civilgamers.ah1.base.AH1
+load: startup
 commands:
   goto:
     description: goto player

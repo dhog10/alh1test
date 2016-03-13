@@ -27,7 +27,7 @@ public class Util {
 
     public static void advert(CommandSender sender, String message){
         Player senderPlayer = (Player) sender;
-        Bukkit.getServer().broadcastMessage("§f" + senderPlayer.getDisplayName() + "§eADVERT§7: " + message);
+        Bukkit.getServer().broadcastMessage("§f" + senderPlayer.getDisplayName() + " - §eADVERT§7: " + message);
     }
 
 }
