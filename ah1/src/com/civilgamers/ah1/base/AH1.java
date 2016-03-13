@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.civilgamers.ah1.commands.Commands;
 import com.civilgamers.ah1.databases.AHDatabase;
+import com.civilgamers.ah1.databases.Economy;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
@@ -17,6 +18,8 @@ public class AH1 extends JavaPlugin implements Listener {
     private AHDatabase database;
     private Commands commands;
 
+    private Economy economy;
+
     public void onEnable(){
         PluginDescriptionFile pdfFile = getDescription();
         Logger logger = Logger.getLogger("Minecraft");
@@ -25,11 +28,16 @@ public class AH1 extends JavaPlugin implements Listener {
     }
 
     public void preInit() {
+        if(!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+
         getConfig().options().copyDefaults(true);
         saveConfig();
         reloadConfig();
 
         database = new AHDatabase();
+        economy = new Economy(this);
         commands = new Commands();
 
         if(getConfig().getBoolean("database.mysql.enabled")) {
@@ -46,6 +54,7 @@ public class AH1 extends JavaPlugin implements Listener {
 
     public void init() {
         database.connect();
+        economy.init();
 
         getCommand("ah").setExecutor(commands);
         getCommand("advert").setExecutor(commands);
