@@ -38,7 +38,7 @@ public class AH1 extends JavaPlugin implements Listener {
 
         database = new AHDatabase();
         economy = new Economy(this);
-        commands = new Commands();
+        commands = new Commands(this);
 
         if(getConfig().getBoolean("database.mysql.enabled")) {
             database.setConnectionInfo(
@@ -73,8 +73,13 @@ public class AH1 extends JavaPlugin implements Listener {
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
         return new AH1WorldGenerator();
     }
+
     public AHDatabase getAHDatabase() {
         return database;
+    }
+
+    public Economy getEconomy() {
+        return economy;
     }
 
 
