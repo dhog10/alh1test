@@ -2,6 +2,7 @@ package com.civilgamers.ah1.commands;
 
 import com.civilgamers.ah1.base.AH1;
 import com.civilgamers.ah1.base.Util;
+import generation.BasicChunk;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,8 +29,9 @@ public class Commands implements CommandExecutor {
         }else {
             if (cmd.getName().equalsIgnoreCase("advert")) {
                 playerAdvertCommand(player, args[0]);
-            } else if (cmd.getName().equalsIgnoreCase("example")) {
-                Util.msg(player, "This is a test fam");
+            } else if (cmd.getName().equalsIgnoreCase("createchunk")) {
+                Util.msg(player, "Creating chunk...");
+                //BasicChunk
             } else if (cmd.getName().equalsIgnoreCase("ah")) {
                 gamemodeCommand(player, args[0]);
             }

@@ -58,7 +58,7 @@ public class AH1 extends JavaPlugin implements Listener {
 
         getCommand("ah").setExecutor(commands);
         getCommand("advert").setExecutor(commands);
-        getCommand("example").setExecutor(commands);
+        getCommand("createchunk").setExecutor(commands);
         Location loc = getServer().getWorld("world").getSpawnLocation();
         Location tempLoc = loc.clone();
         for(int x = 0; x < 16; x++){
