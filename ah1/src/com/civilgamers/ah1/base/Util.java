@@ -9,23 +9,23 @@ import org.bukkit.entity.Player;
  */
 public class Util {
 
-    public void msg(Player player, String message){
+    public static void msg(Player player, String message){
         player.sendMessage("§e*§4Gamemode§e*§7:" + message);
     }
 
-    public void msg(CommandSender player, String message){
+    public static void msg(CommandSender player, String message){
         player.sendMessage("§e*§4Gamemode§e*§7:" + message);
     }
 
-    public void broadcast(String message){
+    public static void broadcast(String message){
         Bukkit.getServer().broadcastMessage("§e*§4Gamemode§e*§7:" + message);
     }
 
-    public void advert(String message){
+    public static void advert(String message){
         Bukkit.getServer().broadcastMessage("§fServer: §eADVERT§7:" + message);
     }
 
-    public void advert(CommandSender sender, String message){
+    public static void advert(CommandSender sender, String message){
         Player senderPlayer = (Player) sender;
         Bukkit.getServer().broadcastMessage("§f" + senderPlayer.getDisplayName() + "§eADVERT§7:" + message);
     }
