@@ -1,7 +1,4 @@
 database:
-  sqlite:
-    enabled: true
-    database: test-db.db
   mysql:
     enabled: false
     credentials:
@@ -10,3 +7,5 @@ database:
       database: AH1
       ip: 127.0.0.1
       port: 3306
+  sqlite:
+    database: test-db.db

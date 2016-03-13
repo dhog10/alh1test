@@ -1,19 +1,13 @@
 package com.civilgamers.ah1.base;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import com.civilgamers.ah1.commands.Commands;
 import com.civilgamers.ah1.databases.AHDatabase;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AH1 extends JavaPlugin implements Listener {
 
     private AHDatabase database;
-    Commands commands;
+    private Commands commands;
 
     public void onEnable(){
         PluginDescriptionFile pdfFile = getDescription();
@@ -37,10 +31,22 @@ public class AH1 extends JavaPlugin implements Listener {
 
         database = new AHDatabase();
         commands = new Commands();
+
+        if(getConfig().getBoolean("database.mysql.enabled")) {
+            database.setConnectionInfo(
+                    getConfig().getString("database.mysql.credentials.ip"),
+                    getConfig().getInt("database.mysql.credentials.port"),
+                    getConfig().getString("database.mysql.credentials.database"),
+                    getConfig().getString("database.mysql.credentials.username"),
+                    getConfig().getString("database.mysql.credentials.password"));
+        } else {
+            database.setConnectionInfo(getDataFolder().getPath() + File.separator + getConfig().getString("database.sqlite.database"));
+        }
     }
 
     public void init() {
-        //database.connect();
+        database.connect();
+
         getCommand("ah").setExecutor(commands);
         getCommand("advert").setExecutor(commands);
         getCommand("example").setExecutor(commands);
@@ -58,13 +64,6 @@ public class AH1 extends JavaPlugin implements Listener {
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
         return new AH1WorldGenerator();
     }
-
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent e) {
-        e.getPlayer().sendMessage("You fucked a block in half");
-        //e.getPlayer().setHealth(0);
-    }
-
     public AHDatabase getAHDatabase() {
         return database;
     }
