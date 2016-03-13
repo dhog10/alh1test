@@ -44,7 +44,7 @@ public class BasicChunk {
             for (int z = 0; z < 16; z++) {
                 tempLoc.setX(initialLoc.getX() + x);
                 tempLoc.setZ(initialLoc.getZ() + z);
-                loc.getBlock().setType(material);
+                tempLoc.getBlock().setType(material);
             }
         }
     }
@@ -59,7 +59,7 @@ public class BasicChunk {
                 if(rand.nextInt(900) == 50) {
                     tempLoc.setX(initialLoc.getX() + x);
                     tempLoc.setZ(initialLoc.getZ() + z);
-                    loc.getBlock().setType(Material.IRON_ORE);
+                    tempLoc.getBlock().setType(Material.IRON_ORE);
                 }
             }
         }
@@ -75,7 +75,7 @@ public class BasicChunk {
                 if(rand.nextInt(2000) == 50) {
                     tempLoc.setX(initialLoc.getX() + x);
                     tempLoc.setZ(initialLoc.getZ() + z);
-                    loc.getBlock().setType(Material.GOLD_ORE);
+                    tempLoc.getBlock().setType(Material.GOLD_ORE);
                 }
             }
         }
