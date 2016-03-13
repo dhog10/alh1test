@@ -1,6 +1,7 @@
 package com.civilgamers.ah1.databases;
 
 import com.civilgamers.ah1.base.AH1;
+import com.civilgamers.ah1.base.Util;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -109,6 +110,10 @@ public class Economy {
             statement = plugin.getAHDatabase().getConnection().prepareStatement("SELECT * FROM " + table + " WHERE uid=?;");
             statement.setString(1, uniqueID);
             resultSet = statement.executeQuery();
+            Util.broadcast("Broadcasting...");
+            while(resultSet.next()) {
+                Util.broadcast("ID: " + resultSet.getString("uid") + "\t" + resultSet.getInt("balance"));
+            }
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
