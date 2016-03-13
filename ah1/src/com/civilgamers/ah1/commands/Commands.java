@@ -27,14 +27,14 @@ public class Commands implements CommandExecutor {
             Util.msg(player, "----//Commands\\\\----");
             Util.msg(player, "§e/help§7: Lists gamemode commands");
             Util.msg(player, "--------------------");
-        }
-
-        if(cmd.getName().equalsIgnoreCase("advert")) {
-            playerAdvertCommand(player, args[0]);
-        }else if(cmd.getName().equalsIgnoreCase("example")){
-            Util.msg(player, "This is a test fam");
-        }else if(cmd.getName().equalsIgnoreCase("ah")){
-            gamemodeCommand(player, args[0]);
+        }else {
+            if (cmd.getName().equalsIgnoreCase("advert")) {
+                playerAdvertCommand(player, args[0]);
+            } else if (cmd.getName().equalsIgnoreCase("example")) {
+                Util.msg(player, "This is a test fam");
+            } else if (cmd.getName().equalsIgnoreCase("ah")) {
+                gamemodeCommand(player, args[0]);
+            }
         }
         return true;
     }
