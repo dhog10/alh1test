@@ -18,6 +18,7 @@ public class BasicChunk {
     public void create(Player player, int posX, int posZ) {
         placeLocation = new Location(Bukkit.getServer().getWorld("world"), player.getLocation().getChunk().getBlock(0,0,0).getX(), 80, player.getLocation().getChunk().getBlock(0,0,0).getZ());
         for(int y = 80; y > 0; y--){
+            placeLocation.setY(y);
             if(y == 80) {
                 placeLayer(Material.GRASS, placeLocation);
             }
@@ -38,13 +39,12 @@ public class BasicChunk {
 
         //generate layer
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-        Location tempLoc = initialLoc.clone();
 
         for(int x = 0; x < 16; x++) {
+            initialLoc.setX(initialLoc.getX() + 1);
             for (int z = 0; z < 16; z++) {
-                tempLoc.setX(initialLoc.getX() + x);
-                tempLoc.setZ(initialLoc.getZ() + z);
-                tempLoc.getBlock().setType(material);
+                initialLoc.setZ(initialLoc.getZ() + 1);
+                initialLoc.getBlock().setType(material);
             }
         }
     }
@@ -52,14 +52,13 @@ public class BasicChunk {
     public void placeIron(Location loc){
         //generate layer
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-        Location tempLoc = initialLoc.clone();
 
         for(int x = 0; x < 16; x++) {
+            initialLoc.setX(initialLoc.getX() + 1);
             for (int z = 0; z < 16; z++) {
                 if(rand.nextInt(900) == 50) {
-                    tempLoc.setX(initialLoc.getX() + x);
-                    tempLoc.setZ(initialLoc.getZ() + z);
-                    tempLoc.getBlock().setType(Material.IRON_ORE);
+                    initialLoc.setZ(initialLoc.getZ() + 1);
+                    initialLoc.getBlock().setType(Material.IRON_ORE);
                 }
             }
         }
@@ -68,14 +67,13 @@ public class BasicChunk {
     public void placeGold(Location loc){
         //generate layer
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-        Location tempLoc = initialLoc.clone();
 
         for(int x = 0; x < 16; x++) {
+            initialLoc.setX(initialLoc.getX() + 1);
             for (int z = 0; z < 16; z++) {
                 if(rand.nextInt(2000) == 50) {
-                    tempLoc.setX(initialLoc.getX() + x);
-                    tempLoc.setZ(initialLoc.getZ() + z);
-                    tempLoc.getBlock().setType(Material.GOLD_ORE);
+                    initialLoc.setZ(initialLoc.getZ() + 1);
+                    initialLoc.getBlock().setType(Material.GOLD_ORE);
                 }
             }
         }
