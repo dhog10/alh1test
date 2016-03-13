@@ -1,6 +1,6 @@
 name: Test
 version: 1.0
-main: com.civilgamers.ah1.AH1
+main: com.civilgamers.ah1.base.AH1
 commands:
   goto:
     description: goto player

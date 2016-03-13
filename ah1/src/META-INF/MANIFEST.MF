@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.civilgamers.ah1.AH1
+Main-Class: com.civilgamers.ah1.base.AH1
 

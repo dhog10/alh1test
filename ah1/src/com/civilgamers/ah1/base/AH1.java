@@ -1,4 +1,4 @@
-package com.civilgamers.ah1;
+package com.civilgamers.ah1.base;
 
 import java.util.logging.Logger;
 
@@ -24,7 +24,7 @@ public class AH1 extends JavaPlugin implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         e.getPlayer().sendMessage("You fucked a block in half");
-        e.getPlayer().setHealth(0);
+        //e.getPlayer().setHealth(0);
     }
 
     /*public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

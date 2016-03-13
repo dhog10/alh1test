@@ -1,5 +1,7 @@
 package com.civilgamers.ah1;
 
+import com.civilgamers.ah1.base.AH1;
+
 /**
  * Created by Daniel on 13/03/2016.
  */
