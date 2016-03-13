@@ -86,9 +86,13 @@ public class Economy {
             if(resultSet == null) {
                 playerExistsInDB = false;
                 resultSet.close();
+                Util.broadcast("False test #1");
+                resultSet.close();
             }
 
             playerExistsInDB = resultSet.next();
+            if(!playerExistsInDB)
+                Util.broadcast("False test #2");
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
@@ -110,10 +114,6 @@ public class Economy {
             statement = plugin.getAHDatabase().getConnection().prepareStatement("SELECT * FROM " + table + " WHERE uid=?;");
             statement.setString(1, uniqueID);
             resultSet = statement.executeQuery();
-            Util.broadcast("Broadcasting...");
-            while(resultSet.next()) {
-                Util.broadcast("ID: " + resultSet.getString("uid") + "\t" + resultSet.getInt("balance"));
-            }
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
