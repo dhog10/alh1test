@@ -24,32 +24,35 @@ public class Commands implements CommandExecutor {
 
         // if they enter nothing
         if(args.length == 0){
-            Util.msg(player, "----//Commands\\\\----");
-            Util.msg(player, "§e/help§7: Lists gamemode commands");
-            Util.msg(player, "--------------------");
-        }
-
-        if(cmd.getName().equalsIgnoreCase("advert")) {
-            playerAdvertCommand(player, args[0]);
-        }else if(cmd.getName().equalsIgnoreCase("example")){
-            Util.msg(player, "This is a test fam");
-        }else if(cmd.getName().equalsIgnoreCase("ah")){
-            gamemodeCommand(player, args[0]);
+            printHelp(player);
+        }else {
+            if (cmd.getName().equalsIgnoreCase("advert")) {
+                playerAdvertCommand(player, args[0]);
+            } else if (cmd.getName().equalsIgnoreCase("example")) {
+                Util.msg(player, "This is a test fam");
+            } else if (cmd.getName().equalsIgnoreCase("ah")) {
+                gamemodeCommand(player, args[0]);
+            }
         }
         return true;
     }
 
     public boolean gamemodeCommand(Player player, String command){
         if(command.equalsIgnoreCase("help")){
-            Util.msg(player, "----//Commands\\\\----");
-            Util.msg(player, "§e/help§7: Lists gamemode commands");
-            Util.msg(player, "--------------------");
+            printHelp(player);
         }else if(command.equalsIgnoreCase("balance")){
             Util.msg(player, "Your balance is: " + plugin.getEconomy().getBalance(player.getUniqueId().toString()));
         }else{
             Util.msg(player, "Command not recognised! Type /help for all available commands.");
         }
         return true;
+    }
+
+    public void printHelp(Player player){
+        Util.msg(player, "----//Commands\\\\----");
+        Util.msg(player, "§e/ah help§7: Lists gamemode commands");
+        Util.msg(player, "§e/ah balance§7: Displays your money balance");
+        Util.msg(player, "--------------------");
     }
 
     public boolean playerAdvertCommand(Player sender, String message){
