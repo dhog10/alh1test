@@ -51,6 +51,7 @@ public class Commands implements CommandExecutor {
     public void printHelp(Player player){
         Util.msg(player, "----//Commands\\\\----");
         Util.msg(player, "§e/ah help§7: Lists gamemode commands");
+        Util.msg(player, "§e/ah balance§7: Displays your money balance");
         Util.msg(player, "--------------------");
     }
 
