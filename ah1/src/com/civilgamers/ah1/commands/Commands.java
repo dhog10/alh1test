@@ -24,9 +24,7 @@ public class Commands implements CommandExecutor {
 
         // if they enter nothing
         if(args.length == 0){
-            Util.msg(player, "----//Commands\\\\----");
-            Util.msg(player, "§e/help§7: Lists gamemode commands");
-            Util.msg(player, "--------------------");
+            printHelp(player);
         }else {
             if (cmd.getName().equalsIgnoreCase("advert")) {
                 playerAdvertCommand(player, args[0]);
@@ -41,15 +39,19 @@ public class Commands implements CommandExecutor {
 
     public boolean gamemodeCommand(Player player, String command){
         if(command.equalsIgnoreCase("help")){
-            Util.msg(player, "----//Commands\\\\----");
-            Util.msg(player, "§e/ah help§7: Lists gamemode commands");
-            Util.msg(player, "--------------------");
+            printHelp(player);
         }else if(command.equalsIgnoreCase("balance")){
             Util.msg(player, "Your balance is: " + plugin.getEconomy().getBalance(player.getUniqueId().toString()));
         }else{
             Util.msg(player, "Command not recognised! Type /help for all available commands.");
         }
         return true;
+    }
+
+    public void printHelp(Player player){
+        Util.msg(player, "----//Commands\\\\----");
+        Util.msg(player, "§e/ah help§7: Lists gamemode commands");
+        Util.msg(player, "--------------------");
     }
 
     public boolean playerAdvertCommand(Player sender, String message){
