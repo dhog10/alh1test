@@ -126,6 +126,7 @@ public class Economy {
         PreparedStatement createEconomyTable = null;
         try {
             createEconomyTable = plugin.getAHDatabase().getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + table + "(VARCHAR uid NOT NULL, INTEGER balance NOT NULL);");
+            createEconomyTable.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
