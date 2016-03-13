@@ -1,5 +1,6 @@
 package com.civilgamers.ah1.commands;
 
+import com.civilgamers.ah1.base.AH1;
 import com.civilgamers.ah1.base.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -11,6 +12,12 @@ import org.bukkit.entity.Player;
  * Created by Daniel on 13/03/2016.
  */
 public class Commands implements CommandExecutor {
+
+    public AH1 plugin;
+
+    public Commands(AH1 plugin) {
+        this.plugin = plugin;
+    }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
@@ -31,7 +38,9 @@ public class Commands implements CommandExecutor {
             Util.msg(player, "----//Commands\\\\----");
             Util.msg(player, "§e/help§7: Lists gamemode commands");
             Util.msg(player, "--------------------");
-        }else{
+        } if(command.equalsIgnoreCase("balance")){
+            Util.msg(player, "Your balance is: " + plugin.getEconomy().getBalance(player.getUniqueId().toString()));
+        } else{
             Util.msg(player, "Command not recognised! Type /help for all available commands.");
         }
         return true;
