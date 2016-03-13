@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import com.civilgamers.ah1.commands.Commands;
 import com.civilgamers.ah1.databases.AHDatabase;
 import com.civilgamers.ah1.databases.Economy;
+import generation.BasicChunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
@@ -17,6 +18,7 @@ public class AH1 extends JavaPlugin implements Listener {
 
     private AHDatabase database;
     private Commands commands;
+    private BasicChunk basicChunk;
 
     private Economy economy;
 
@@ -39,6 +41,7 @@ public class AH1 extends JavaPlugin implements Listener {
         database = new AHDatabase();
         economy = new Economy(this);
         commands = new Commands(this);
+        basicChunk = new BasicChunk();
 
         if(getConfig().getBoolean("database.mysql.enabled")) {
             database.setConnectionInfo(
@@ -80,6 +83,10 @@ public class AH1 extends JavaPlugin implements Listener {
 
     public Economy getEconomy() {
         return economy;
+    }
+
+    public BasicChunk getBasicChunk(){
+        return basicChunk;
     }
 
 

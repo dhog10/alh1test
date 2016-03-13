@@ -32,7 +32,8 @@ public class Commands implements CommandExecutor {
                 }
             } else if (cmd.getName().equalsIgnoreCase("createchunk")) {
                 Util.msg(player, "Creating chunk...");
-                //BasicChunk
+                plugin.getBasicChunk().create(player, (int)player.getLocation().getX(), (int)player.getLocation().getZ());
+                Util.msg(player, "Placed chunk at you...");
             } else if (cmd.getName().equalsIgnoreCase("ah")) {
                 if(args.length == 0){
                     printHelp(player);
