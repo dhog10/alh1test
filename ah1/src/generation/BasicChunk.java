@@ -95,7 +95,7 @@ public class BasicChunk {
         for(int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 initialLoc.setZ(initialLoc.getZ() + 1);
-                if(rand.nextInt(12) == 1) {
+                if(rand.nextInt(10) == 1) {
                     initialLoc.getBlock().setType(Material.LONG_GRASS);
                     initialLoc.getBlock().setData((byte)1);
                 }
@@ -111,7 +111,7 @@ public class BasicChunk {
         for(int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 initialLoc.setZ(initialLoc.getZ() + 1);
-                if(rand.nextInt(45) == 1) {
+                if(rand.nextInt(35) == 1) {
                     switch(rand.nextInt(2)) {
                         case 0:
                             initialLoc.getBlock().setType(Material.RED_ROSE);
