@@ -38,7 +38,7 @@ public class BasicChunk {
 
         //generate layer
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-        Location tempLoc = initialLoc;
+        Location tempLoc = initialLoc.clone();
 
         for(int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -52,7 +52,7 @@ public class BasicChunk {
     public void placeIron(Location loc){
         //generate layer
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-        Location tempLoc = initialLoc;
+        Location tempLoc = initialLoc.clone();
 
         for(int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -68,7 +68,7 @@ public class BasicChunk {
     public void placeGold(Location loc){
         //generate layer
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-        Location tempLoc = initialLoc;
+        Location tempLoc = initialLoc.clone();
 
         for(int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
