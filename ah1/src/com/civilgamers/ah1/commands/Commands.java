@@ -42,7 +42,7 @@ public class Commands implements CommandExecutor {
     public boolean gamemodeCommand(Player player, String command){
         if(command.equalsIgnoreCase("help")){
             Util.msg(player, "----//Commands\\\\----");
-            Util.msg(player, "§e/help§7: Lists gamemode commands");
+            Util.msg(player, "§e/ah help§7: Lists gamemode commands");
             Util.msg(player, "--------------------");
         }else if(command.equalsIgnoreCase("balance")){
             Util.msg(player, "Your balance is: " + plugin.getEconomy().getBalance(player.getUniqueId().toString()));
