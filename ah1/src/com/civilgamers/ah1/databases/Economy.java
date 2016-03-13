@@ -50,6 +50,7 @@ public class Economy {
 
     public int getBalance(String uniqueID) {
         ResultSet resultSet = null;
+        PreparedStatement statement = null;
         int balance = 0;
 
         if(!existsInDatabase(uniqueID)) {
@@ -59,7 +60,9 @@ public class Economy {
 
         try {
             /* Don't need to check if the resultSet is null as that's done in !existsInDatabase() */
-            resultSet = getResultSet(uniqueID);
+            statement = plugin.getAHDatabase().getConnection().prepareStatement("SELECT * FROM " + table + " WHERE uid=?;");
+            statement.setString(1, uniqueID);
+            resultSet = statement.executeQuery();
             resultSet.next();
 
             balance = resultSet.getInt("balance");
@@ -67,6 +70,7 @@ public class Economy {
             e.printStackTrace();
         } finally {
             try {
+                statement.close();
                 resultSet.close();
             } catch(Exception e) {
                 e.printStackTrace();
@@ -78,53 +82,30 @@ public class Economy {
 
     public boolean existsInDatabase(String uniqueID) {
         ResultSet resultSet = null;
-        boolean playerExistsInDB = false;
-
-        try {
-            resultSet = getResultSet(uniqueID);
-
-            if(resultSet == null) {
-                playerExistsInDB = false;
-                resultSet.close();
-                Util.broadcast("False test #1");
-                resultSet.close();
-            }
-
-            playerExistsInDB = resultSet.next();
-            if(!playerExistsInDB)
-                Util.broadcast("False test #2");
-        } catch(Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                resultSet.close();
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return playerExistsInDB;
-    }
-
-    private ResultSet getResultSet(String uniqueID) {
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        boolean playerExistsInDB = false;
 
         try {
             statement = plugin.getAHDatabase().getConnection().prepareStatement("SELECT * FROM " + table + " WHERE uid=?;");
             statement.setString(1, uniqueID);
             resultSet = statement.executeQuery();
-        } catch(Exception e) {
+
+            if (resultSet == null)
+                playerExistsInDB = false;
+
+            playerExistsInDB = resultSet.next();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
                 statement.close();
-            } catch(Exception e) {
+                resultSet.close();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return resultSet;
+        return playerExistsInDB;
     }
 
     private void createTable() {
