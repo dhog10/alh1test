@@ -12,11 +12,12 @@ import java.util.Random;
  */
 public class BasicChunk {
 
-    Location placeLocation;
     Random rand = new Random();
 
-    public void create(Player player, int posX, int posZ) {
-        placeLocation = new Location(Bukkit.getServer().getWorld("world"), player.getLocation().getChunk().getBlock(0,0,0).getX(), 80, player.getLocation().getChunk().getBlock(0,0,0).getZ());
+    public void create(Player player) {
+        int startX = player.getLocation().getChunk().getBlock(0,0,0).getX();
+        int startZ = player.getLocation().getChunk().getBlock(0,0,0).getZ();
+        Location placeLocation = new Location(Bukkit.getServer().getWorld("world"),startX, 80, startZ);
         for(int y = 80; y > 0; y--){
             placeLocation.setY(y);
             if(y == 80) {
@@ -41,11 +42,12 @@ public class BasicChunk {
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
 
         for(int x = 0; x < 16; x++) {
-            initialLoc.setX(initialLoc.getX() + 1);
             for (int z = 0; z < 16; z++) {
                 initialLoc.setZ(initialLoc.getZ() + 1);
                 initialLoc.getBlock().setType(material);
             }
+            initialLoc.setX(initialLoc.getX() + 1);
+            initialLoc.setZ(loc.getZ());
         }
     }
 
@@ -54,13 +56,14 @@ public class BasicChunk {
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
 
         for(int x = 0; x < 16; x++) {
-            initialLoc.setX(initialLoc.getX() + 1);
             for (int z = 0; z < 16; z++) {
+                initialLoc.setZ(initialLoc.getZ() + 1);
                 if(rand.nextInt(900) == 50) {
-                    initialLoc.setZ(initialLoc.getZ() + 1);
                     initialLoc.getBlock().setType(Material.IRON_ORE);
                 }
             }
+            initialLoc.setX(initialLoc.getX() + 1);
+            initialLoc.setZ(loc.getZ());
         }
     }
 
@@ -69,13 +72,14 @@ public class BasicChunk {
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
 
         for(int x = 0; x < 16; x++) {
-            initialLoc.setX(initialLoc.getX() + 1);
             for (int z = 0; z < 16; z++) {
+                initialLoc.setZ(initialLoc.getZ() + 1);
                 if(rand.nextInt(2000) == 50) {
-                    initialLoc.setZ(initialLoc.getZ() + 1);
                     initialLoc.getBlock().setType(Material.GOLD_ORE);
                 }
             }
+            initialLoc.setX(initialLoc.getX() + 1);
+            initialLoc.setZ(loc.getZ());
         }
     }
 
