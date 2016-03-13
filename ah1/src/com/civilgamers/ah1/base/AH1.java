@@ -17,11 +17,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AH1 extends JavaPlugin implements Listener {
 
     private AHDatabase database;
+    Commands commands;
 
     public void onEnable(){
         PluginDescriptionFile pdfFile = getDescription();
         Logger logger = Logger.getLogger("Minecraft");
-        getServer().getPluginManager().registerEvents(this, new Commands());
+
     }
 
     public void preInit() {
@@ -34,6 +35,9 @@ public class AH1 extends JavaPlugin implements Listener {
 
     public void init() {
         //database.connect();
+        getCommand("ah").setExecutor(commands);
+        getCommand("help").setExecutor(commands);
+        getCommand("example").setExecutor(commands);
     }
 
     @EventHandler

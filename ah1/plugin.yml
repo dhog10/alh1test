@@ -4,3 +4,9 @@ main: com.civilgamers.ah1.base.AH1
 commands:
   goto:
     description: goto player
+  ah:
+    description: contains gamemode commands
+  advert:
+    description: adverts a message globally
+  example:
+    description: test

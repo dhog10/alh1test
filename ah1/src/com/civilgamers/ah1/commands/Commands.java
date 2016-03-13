@@ -19,7 +19,7 @@ public class Commands implements CommandExecutor {
             playerAdvertCommand(player, args[0]);
         }else if(cmd.getName().equalsIgnoreCase("example")){
             Util.msg(player, "This is a test fam");
-        }else if(cmd.getName().equalsIgnoreCase("/ah")){
+        }else if(cmd.getName().equalsIgnoreCase("ah")){
             gamemodeCommand(player, args[0]);
         }
         return true;
@@ -27,6 +27,7 @@ public class Commands implements CommandExecutor {
 
     public boolean gamemodeCommand(Player player, String command){
         if(command.equalsIgnoreCase("help")){
+            player.sendMessage("apples and pears");
             Util.msg(player, "----//Commands\\\\----");
             Util.msg(player, "§e/help§7: Lists gamemode commands");
             Util.msg(player, "--------------------");
