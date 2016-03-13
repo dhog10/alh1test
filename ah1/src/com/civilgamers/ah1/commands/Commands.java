@@ -15,18 +15,18 @@ public class Commands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
 
-        if(cmd.getName().equals("advert")) {
+        if(cmd.getName().equalsIgnoreCase("advert")) {
             playerAdvertCommand(player, args[0]);
-        }else if(cmd.getName().equals("example")){
+        }else if(cmd.getName().equalsIgnoreCase("example")){
             Util.msg(player, "This is a test fam");
-        }else if(cmd.getName().equals("/ah")){
+        }else if(cmd.getName().equalsIgnoreCase("/ah")){
             gamemodeCommand(player, args[0]);
         }
         return true;
     }
 
     public boolean gamemodeCommand(Player player, String command){
-        if(command.equals("help")){
+        if(command.equalsIgnoreCase("help")){
             Util.msg(player, "----//Commands\\\\----");
             Util.msg(player, "§e/help§7: Lists gamemode commands");
             Util.msg(player, "--------------------");
