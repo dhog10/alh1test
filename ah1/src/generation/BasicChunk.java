@@ -29,6 +29,7 @@ public class BasicChunk {
             if(y <= 70) {
                 placeLayer(Material.STONE, placeLocation);
                 placeIron(placeLocation);
+                placeGold(placeLocation);
             }
         }
     }
@@ -55,10 +56,26 @@ public class BasicChunk {
 
         for(int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                tempLoc.setX(initialLoc.getX() + x);
-                tempLoc.setZ(initialLoc.getZ() + z);
-                if(rand.nextInt(200) == 50) {
+                if(rand.nextInt(900) == 50) {
+                    tempLoc.setX(initialLoc.getX() + x);
+                    tempLoc.setZ(initialLoc.getZ() + z);
                     loc.getBlock().setType(Material.IRON_ORE);
+                }
+            }
+        }
+    }
+
+    public void placeGold(Location loc){
+        //generate layer
+        Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
+        Location tempLoc = initialLoc;
+
+        for(int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                if(rand.nextInt(2000) == 50) {
+                    tempLoc.setX(initialLoc.getX() + x);
+                    tempLoc.setZ(initialLoc.getZ() + z);
+                    loc.getBlock().setType(Material.GOLD_ORE);
                 }
             }
         }

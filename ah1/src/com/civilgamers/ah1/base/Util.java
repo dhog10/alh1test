@@ -14,7 +14,7 @@ public class Util {
     }
 
     public static void msg(CommandSender player, String message){
-        player.sendMessage("§e*§4Gamemode§e*§7:"  + message);
+        player.sendMessage("§e<<§4Gamemode§e>>§7 "  + message);
     }
 
     public static void broadcast(String message){
