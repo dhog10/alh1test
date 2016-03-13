@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,7 +23,8 @@ public class AH1 extends JavaPlugin implements Listener {
     public void onEnable(){
         PluginDescriptionFile pdfFile = getDescription();
         Logger logger = Logger.getLogger("Minecraft");
-
+        preInit();
+        init();
     }
 
     public void preInit() {
@@ -31,6 +33,7 @@ public class AH1 extends JavaPlugin implements Listener {
         reloadConfig();
 
         database = new AHDatabase();
+        commands = new Commands();
     }
 
     public void init() {
@@ -38,6 +41,10 @@ public class AH1 extends JavaPlugin implements Listener {
         getCommand("ah").setExecutor(commands);
         getCommand("help").setExecutor(commands);
         getCommand("example").setExecutor(commands);
+    }
+
+    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
+        return new AH1WorldGenerator();
     }
 
     @EventHandler

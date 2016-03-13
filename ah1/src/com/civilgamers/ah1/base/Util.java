@@ -18,7 +18,7 @@ public class Util {
     }
 
     public static void broadcast(String message){
-        Bukkit.getServer().broadcastMessage("§e*§4Gamemode§e*§7: " + message);
+        Bukkit.getServer().broadcastMessage("§e<<§4Gamemode§e>>§7 " + message);
     }
 
     public static void advert(String message){
