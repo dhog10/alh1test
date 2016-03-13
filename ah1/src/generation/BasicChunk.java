@@ -129,11 +129,10 @@ public class BasicChunk {
         }
     }
 
-    private int numOfTrees = 0;
-    private Location tempTreeLocation;
     private void placeTrees(Location loc){
-        numOfTrees = rand.nextInt(2) + 2;
-        for(int i = 0; i < numOfTrees; i++){
+        Location tempTreeLocation;
+        int numOfTrees = rand.nextInt(2) + 2;
+        for(int i = 0; i <= numOfTrees; i++){
             tempTreeLocation = loc.clone();
             tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(13) + 2);
             tempTreeLocation.setZ(tempTreeLocation.getZ() + rand.nextInt(13) + 2);
