@@ -35,6 +35,7 @@ public class BasicChunk extends AHChunk {
         chunkGeneration.buildBlockBody(placeLocation, surfaceType, ores);
 
         placeLocation.setY(80);
+        chunkGeneration.placeMobs(placeLocation);
         chunkGeneration.placeGrass(placeLocation);
         chunkGeneration.placeFlowers(placeLocation);
         chunkGeneration.placeTrees(placeLocation);
