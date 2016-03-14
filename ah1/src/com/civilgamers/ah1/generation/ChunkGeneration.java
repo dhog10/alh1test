@@ -1,4 +1,4 @@
-package generation;
+package com.civilgamers.ah1.generation;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

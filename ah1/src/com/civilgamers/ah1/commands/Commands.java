@@ -2,9 +2,8 @@ package com.civilgamers.ah1.commands;
 
 import com.civilgamers.ah1.base.AH1;
 import com.civilgamers.ah1.base.Util;
-import generation.BasicChunk;
-import generation.LakeChunk;
-import org.bukkit.Bukkit;
+import com.civilgamers.ah1.generation.BasicChunk;
+import com.civilgamers.ah1.generation.LakeChunk;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

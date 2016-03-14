@@ -1,4 +1,4 @@
-package generation;
+package com.civilgamers.ah1.generation;
 
 import com.civilgamers.ah1.base.AH1;
 import org.bukkit.Chunk;
