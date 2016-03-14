@@ -32,6 +32,11 @@ public class MobDrops implements Listener {
         spiderDrops.put(new ItemStack(Material.WEB, 1), 6 );
         spiderDrops.put(new ItemStack(Material.WEB, 2), 6 );
         spiderDrops.put(new ItemStack(Material.REDSTONE_BLOCK, 1), 60 );
+        spiderDrops.put(new ItemStack(Material.COOKIE, 1), 60 );
+        spiderDrops.put(new ItemStack(Material.SEEDS, 1), 20 );
+        spiderDrops.put(new ItemStack(Material.STRING, 2), 12 );
+        spiderDrops.put(new ItemStack(Material.POTATO, 1), 50 );
+        spiderDrops.put(new ItemStack(Material.CARROT, 1), 50 );
 
         HashMap<ItemStack, Integer> skeletonDrops = new HashMap<ItemStack, Integer>();
         skeletonDrops.put(new ItemStack(Material.REDSTONE, 1), 10 );
@@ -39,21 +44,29 @@ public class MobDrops implements Listener {
         skeletonDrops.put(new ItemStack(Material.BONE, 3), 5 );
         skeletonDrops.put(new ItemStack(Material.BUCKET, 1), 35 );
         skeletonDrops.put(new ItemStack(Material.IRON_SWORD, 1), 40 );
-        skeletonDrops.put(new ItemStack(Material.DIAMOND_SWORD, 1), 80 );
+        skeletonDrops.put(new ItemStack(Material.DIAMOND_SWORD, 1), 150 );
         skeletonDrops.put(new ItemStack(Material.IRON_SPADE, 1), 30 );
         skeletonDrops.put(new ItemStack(Material.IRON_AXE, 1), 40 );
-        skeletonDrops.put(new ItemStack(Material.IRON_PICKAXE, 1), 40 );
-        skeletonDrops.put(new ItemStack(Material.ARROW, 3), 4 );
-        skeletonDrops.put(new ItemStack(Material.BOW, 1), 15 );
+        skeletonDrops.put(new ItemStack(Material.ARROW, 3), 7 );
+        skeletonDrops.put(new ItemStack(Material.BOW, 1), 12 );
+        skeletonDrops.put(new ItemStack(Material.STRING, 2), 12 );
 
         HashMap<ItemStack, Integer> zombieDrops = new HashMap<ItemStack, Integer>();
         zombieDrops.put(new ItemStack(Material.REDSTONE, 2), 4 );
         zombieDrops.put(new ItemStack(Material.ROTTEN_FLESH, 2), 2 );
         zombieDrops.put(new ItemStack(Material.BOOK_AND_QUILL, 1), 80 );
         zombieDrops.put(new ItemStack(Material.SAPLING , 1), 10 );
-        skeletonDrops.put(new ItemStack(Material.IRON_SPADE, 1), 30 );
-        skeletonDrops.put(new ItemStack(Material.IRON_AXE, 1), 40 );
-        skeletonDrops.put(new ItemStack(Material.IRON_PICKAXE, 1), 40 );
+        zombieDrops.put(new ItemStack(Material.IRON_SPADE, 1), 30 );
+        zombieDrops.put(new ItemStack(Material.IRON_AXE, 1), 35 );
+        zombieDrops.put(new ItemStack(Material.PUMPKIN, 1), 60 );
+        zombieDrops.put(new ItemStack(Material.PUMPKIN_PIE, 1), 80 );
+        zombieDrops.put(new ItemStack(Material.BREAD, 1), 20 );
+        zombieDrops.put(new ItemStack(Material.WHEAT, 1), 15 );
+        zombieDrops.put(new ItemStack(Material.FLOWER_POT_ITEM, 1), 65 );
+        zombieDrops.put(new ItemStack(Material.APPLE, 1), 17 );
+        zombieDrops.put(new ItemStack(Material.SEEDS, 1), 20 );
+        zombieDrops.put(new ItemStack(Material.POTATO, 1), 50 );
+        zombieDrops.put(new ItemStack(Material.CARROT, 1), 50 );
 
         mobDrops.put(EntityType.CREEPER, creeperDrops);
         mobDrops.put(EntityType.SKELETON, skeletonDrops);
