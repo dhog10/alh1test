@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
@@ -37,6 +38,7 @@ public class BasicChunk {
             }
         }
         placeLocation.setY(80);
+        placeMobs(placeLocation);
         placeGrass(placeLocation);
         placeFlowers(placeLocation);
         placeTrees(placeLocation);
@@ -139,6 +141,52 @@ public class BasicChunk {
             Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
         }
 
+    }
+
+    private Location tempMobSpawnLocation;
+    private void placeMobs(Location loc){
+        for(int i = 0; i < 5; i++) {
+            while(true){
+                tempMobSpawnLocation = loc.clone();
+                tempMobSpawnLocation.setX(tempMobSpawnLocation.getX() + rand.nextInt(11) + 3);
+                tempMobSpawnLocation.setZ(tempMobSpawnLocation.getZ() + rand.nextInt(11) + 3);
+                if(tempMobSpawnLocation.getBlock().getType() == Material.AIR){
+                    break;
+                }
+            }
+            switch(rand.nextInt(8)){
+                case 0:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 1:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 2:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 3:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.PIG);
+                    break;
+                case 4:
+                    if(rand.nextInt(10) == 1){
+                        Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.MUSHROOM_COW);
+                    }else {
+                        Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.COW);
+                    }
+                    break;
+                case 5:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 6:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 7:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 }

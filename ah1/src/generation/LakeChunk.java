@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
@@ -32,6 +33,7 @@ public class LakeChunk {
         buildBlockBody(placeLocation);
 
         placeLocation.setY(80);
+        placeMobs(placeLocation);
         placeGrass(placeLocation);
         placeFlowers(placeLocation);
         placeLocation.setY(79);
@@ -196,16 +198,46 @@ public class LakeChunk {
                 tempLakeLocation.setZ((tempLakeLocation.getZ() + z) + lakeStartZ);
                 if(!(x == 0 && z == 0) && !(x == 0 && z == lakeWidthZ - 1) && !(x == lakeWidthX - 1 && z == 0) && !(x == lakeWidthX - 1 && z == lakeWidthZ - 1)){
                     if((x == 1 && z == 0) || (x == 0 && z == 1) || (x == 1 && z == lakeWidthZ - 1) || (x == 0 && z == lakeWidthZ - 2) ||(x == lakeWidthX - 1 && z == 1) || (x == lakeWidthX - 2 && z == 0) || (x == lakeWidthX - 2 && z == lakeWidthZ - 1) || (x == lakeWidthX - 1 && z == lakeWidthZ -2)){
+                        // random corner blocks
                         if(rand.nextInt(2) == 1){
                             tempLakeLocation.getBlock().setType(lakeType);
                         }else{
-                            placeReed(tempLakeLocation);
+                            if(lakeType == Material.LAVA){
+                                tempLakeLocation.getBlock().setType(Material.STONE);
+                            }else {
+                                placeReed(tempLakeLocation);
+                            }
                         }
                     }else{
+                        // normal lake blocks
                         tempLakeLocation.getBlock().setType(lakeType);
+                        // place water lily
                         if(rand.nextInt(7) == 1 && lakeType != Material.LAVA){
                             tempLakeLocation.setY(tempLakeLocation.getY() + 1);
                             tempLakeLocation.getBlock().setType(Material.WATER_LILY);
+                        }
+                        // border stone if lava
+                        if(lakeType == Material.LAVA){
+                            if(x == 0){
+                                Location stonePlaceLocation = tempLakeLocation.clone();
+                                stonePlaceLocation.setX(stonePlaceLocation.getX() + 1);
+                                tempLakeLocation.getBlock().setType(Material.STONE);
+                            }
+                            if (z == 0){
+                                Location stonePlaceLocation = tempLakeLocation.clone();
+                                stonePlaceLocation.setZ(stonePlaceLocation.getZ() + 1);
+                                tempLakeLocation.getBlock().setType(Material.STONE);
+                            }
+                            if(x == lakeWidthX - 1){
+                                Location stonePlaceLocation = tempLakeLocation.clone();
+                                stonePlaceLocation.setX(stonePlaceLocation.getX() - 1);
+                                tempLakeLocation.getBlock().setType(Material.STONE);
+                            }
+                            if (z == lakeWidthZ - 1){
+                                Location stonePlaceLocation = tempLakeLocation.clone();
+                                stonePlaceLocation.setZ(stonePlaceLocation.getZ() - 1);
+                                tempLakeLocation.getBlock().setType(Material.STONE);
+                            }
                         }
                     }
                 }
@@ -222,6 +254,52 @@ public class LakeChunk {
                 tempReedLoc.getBlock().setType(surfaceType);
             }else {
                 tempReedLoc.getBlock().setType(Material.SUGAR_CANE_BLOCK);
+            }
+        }
+    }
+
+    private Location tempMobSpawnLocation;
+    private void placeMobs(Location loc){
+        for(int i = 0; i < 5; i++) {
+            while(true){
+                tempMobSpawnLocation = loc.clone();
+                tempMobSpawnLocation.setX(tempMobSpawnLocation.getX() + rand.nextInt(11) + 3);
+                tempMobSpawnLocation.setZ(tempMobSpawnLocation.getZ() + rand.nextInt(11) + 3);
+                if(tempMobSpawnLocation.getBlock().getType() == Material.AIR){
+                    break;
+                }
+            }
+            switch(rand.nextInt(8)){
+                case 0:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 1:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 2:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 3:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.PIG);
+                    break;
+                case 4:
+                    if(rand.nextInt(10) == 1){
+                        Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.MUSHROOM_COW);
+                    }else {
+                        Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.COW);
+                    }
+                    break;
+                case 5:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 6:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                case 7:
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
+                    break;
+                default:
+                    break;
             }
         }
     }
