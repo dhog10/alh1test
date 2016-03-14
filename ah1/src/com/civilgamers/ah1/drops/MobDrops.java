@@ -64,7 +64,7 @@ public class MobDrops implements Listener {
         zombieDrops.put(new ItemStack(Material.WHEAT, 1), 15 );
         zombieDrops.put(new ItemStack(Material.FLOWER_POT_ITEM, 1), 65 );
         zombieDrops.put(new ItemStack(Material.APPLE, 1), 17 );
-        zombieDrops.put(new ItemStack(Material.SEEDS, 1), 20 );
+        zombieDrops.put(new ItemStack(Material.SEEDS, 1), 14 );
         zombieDrops.put(new ItemStack(Material.POTATO, 1), 50 );
         zombieDrops.put(new ItemStack(Material.CARROT, 1), 50 );
 
