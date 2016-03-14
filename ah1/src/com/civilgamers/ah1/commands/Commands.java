@@ -31,9 +31,9 @@ public class Commands implements CommandExecutor {
                     playerAdvertCommand(player, args[0]);
                 }
             } else if (cmd.getName().equalsIgnoreCase("createchunk")) {
-                Util.msg(player, "Creating chunk...");
+                Util.msg(player, "Creating basic chunk...");
                 plugin.getBasicChunk().create(player);
-                Util.msg(player, "Placed chunk at you...");
+                Util.msg(player, "Placed basic chunk at you...");
             } else if (cmd.getName().equalsIgnoreCase("ah")) {
                 if(args.length == 0){
                     printHelp(player);
@@ -49,7 +49,11 @@ public class Commands implements CommandExecutor {
             printHelp(player);
         }else if(command.equalsIgnoreCase("balance")){
             Util.msg(player, "Your balance is: " + plugin.getEconomy().getBalance(player.getUniqueId().toString()));
-        }else{
+        } else if (command.equalsIgnoreCase("placelake")) {
+            Util.msg(player, "Creating lake chunk...");
+            plugin.getLakeChunk().create(player);
+            Util.msg(player, "Placed lake chunk at you...");
+        } else {
             Util.msg(player, "Command not recognised! Type /help for all available commands.");
         }
         return true;

@@ -39,6 +39,7 @@ public class LakeChunk {
         placeLocation.setY(80);
         placeGrass(placeLocation);
         placeFlowers(placeLocation);
+        createLake(placeLocation);
         placeTrees(placeLocation);
     }
 
@@ -143,15 +144,18 @@ public class LakeChunk {
 
     private int lakeWidthX, lakeWidthZ;
     private Material lakeType;
+    private int push;
     private void createLake(Location loc){
         Location tempLakeLocation = loc.clone();
         tempLakeLocation.setX(tempLakeLocation.getX() + rand.nextInt(4) + 2);
         tempLakeLocation.setZ(tempLakeLocation.getZ() + rand.nextInt(4) + 2);
+        tempLakeLocation.setY(79);
         lakeWidthX = rand.nextInt(4) + 5;
         lakeWidthZ = rand.nextInt(4) + 5;
+        push = 0;
 
         // set lake type
-        if(rand.nextInt(40) == 1){
+        if(rand.nextInt(10) == 1){
             lakeType = Material.LAVA;
         }else{
             lakeType = Material.WATER;
@@ -159,7 +163,12 @@ public class LakeChunk {
 
         for(int x = 0; x < lakeWidthX; x++){
             for(int z = 0; z < lakeWidthZ; z++){
-
+                tempLakeLocation.setX(tempLakeLocation.getX() + 1);
+                if(z == 0){
+                    tempLakeLocation.setZ(tempLakeLocation.getZ() + 1);
+                }
+                tempLakeLocation.setZ(tempLakeLocation.getZ() + 1);
+                tempLakeLocation.getBlock().setType(lakeType);
             }
         }
     }
