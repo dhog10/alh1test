@@ -71,7 +71,7 @@ public class AH1 extends JavaPlugin implements Listener {
             for(int i = 0; i < 16; i++) {
                 tempLoc.setX((loc.getX() + x) - 8);
                 tempLoc.setZ((loc.getZ() + i) - 8);
-                tempLoc.getBlock().setType(Material.GRASS);
+                //tempLoc.getBlock().setType(Material.GRASS);
             }
         }
     }
