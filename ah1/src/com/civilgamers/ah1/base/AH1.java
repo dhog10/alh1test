@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.civilgamers.ah1.commands.Commands;
 import com.civilgamers.ah1.databases.AHDatabase;
+import com.civilgamers.ah1.databases.ChunkStorage;
 import com.civilgamers.ah1.databases.Economy;
 import generation.BasicChunk;
 import generation.LakeChunk;
@@ -23,6 +24,7 @@ public class AH1 extends JavaPlugin implements Listener {
     private LakeChunk lakeChunk;
 
     private Economy economy;
+    private ChunkStorage chunkStorage;
 
     public void onEnable(){
         PluginDescriptionFile pdfFile = getDescription();
@@ -42,6 +44,8 @@ public class AH1 extends JavaPlugin implements Listener {
 
         database = new AHDatabase();
         economy = new Economy(this);
+        chunkStorage = new ChunkStorage(this);
+
         commands = new Commands(this);
         basicChunk = new BasicChunk();
         lakeChunk = new LakeChunk();
@@ -61,6 +65,7 @@ public class AH1 extends JavaPlugin implements Listener {
     public void init() {
         database.connect();
         economy.init();
+        chunkStorage.init();
 
         getCommand("ah").setExecutor(commands);
         getCommand("advert").setExecutor(commands);
@@ -86,6 +91,10 @@ public class AH1 extends JavaPlugin implements Listener {
 
     public Economy getEconomy() {
         return economy;
+    }
+
+    public ChunkStorage getChunkStorage() {
+        return chunkStorage;
     }
 
     public BasicChunk getBasicChunk(){
