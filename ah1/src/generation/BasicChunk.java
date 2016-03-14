@@ -25,9 +25,9 @@ public class BasicChunk extends AHChunk {
         ores.put(Material.DIAMOND_ORE, 7500);
     }
 
-    public void create(Material surfaceType) {
+    public boolean create(Material surfaceType) {
         if(chunkExists()) {
-            return;
+            return false;
         }
 
         Location placeLocation = new Location(Bukkit.getServer().getWorld("world"), chunk.getBlock(0,0,0).getX(), 80, chunk.getBlock(0,0,0).getZ());
@@ -40,5 +40,6 @@ public class BasicChunk extends AHChunk {
         chunkGeneration.placeTrees(placeLocation);
 
         registerChunk();
+        return true;
     }
 }
