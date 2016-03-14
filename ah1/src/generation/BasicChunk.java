@@ -1,5 +1,6 @@
 package generation;
 
+import com.civilgamers.ah1.base.AH1;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,23 +14,23 @@ import java.util.Random;
 /**
  * Created by Daniel on 13/03/2016.
  */
-public class BasicChunk {
+public class BasicChunk extends AHChunk {
 
-    private Random rand = new Random();
-    private ChunkGeneration chunkGeneration = new ChunkGeneration();
-    private HashMap<Material, Integer> ores = new HashMap<Material, Integer>();
+    public BasicChunk(AH1 plugin, Player player){
+        super(plugin, player);
 
-    public BasicChunk(){
         ores.put(Material.STONE, 1);
         ores.put(Material.IRON_ORE, 900);
         ores.put(Material.GOLD_ORE, 2000);
         ores.put(Material.DIAMOND_ORE, 7500);
     }
 
-    public void create(Player player, Material surfaceType) {
-        int startX = player.getLocation().getChunk().getBlock(0,0,0).getX();
-        int startZ = player.getLocation().getChunk().getBlock(0,0,0).getZ();
-        Location placeLocation = new Location(Bukkit.getServer().getWorld("world"),startX, 80, startZ);
+    public void create(Material surfaceType) {
+        if(chunkExists()) {
+            return;
+        }
+
+        Location placeLocation = new Location(Bukkit.getServer().getWorld("world"), chunk.getBlock(0,0,0).getX(), 80, chunk.getBlock(0,0,0).getZ());
 
         chunkGeneration.buildBlockBody(placeLocation, surfaceType, ores);
 
@@ -37,5 +38,7 @@ public class BasicChunk {
         chunkGeneration.placeGrass(placeLocation);
         chunkGeneration.placeFlowers(placeLocation);
         chunkGeneration.placeTrees(placeLocation);
+
+        registerChunk();
     }
 }

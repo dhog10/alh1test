@@ -3,6 +3,7 @@ package com.civilgamers.ah1.commands;
 import com.civilgamers.ah1.base.AH1;
 import com.civilgamers.ah1.base.Util;
 import generation.BasicChunk;
+import generation.LakeChunk;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -33,7 +34,7 @@ public class Commands implements CommandExecutor {
                 }
             } else if (cmd.getName().equalsIgnoreCase("createchunk")) {
                 Util.msg(player, "Creating basic chunk...");
-                plugin.getBasicChunk().create(player, Material.GRASS);
+                new BasicChunk(plugin, player).create(Material.GRASS);
                 Util.msg(player, "Placed basic chunk at you...");
             } else if (cmd.getName().equalsIgnoreCase("ah")) {
                 if(args.length == 0){
@@ -52,11 +53,11 @@ public class Commands implements CommandExecutor {
             Util.msg(player, "Your balance is: " + plugin.getEconomy().getBalance(player.getUniqueId().toString()));
         } else if (command.equalsIgnoreCase("placelake")) {
             Util.msg(player, "Creating lake chunk...");
-            plugin.getLakeChunk().create(player, Material.WATER, Material.GRASS);
+            new LakeChunk(plugin, player).create(Material.WATER, Material.GRASS);
             Util.msg(player, "Placed lake chunk at you...");
         }else if(command.equalsIgnoreCase("placelavalake")){
             Util.msg(player, "Creating lava lake chunk...");
-            plugin.getLakeChunk().create(player, Material.LAVA, Material.GRASS);
+            new LakeChunk(plugin, player).create(Material.LAVA, Material.GRASS);
             Util.msg(player, "Placed lava lake chunk at you...");
         } else{
             Util.msg(player, "Command not recognised! Type /help for all available commands.");

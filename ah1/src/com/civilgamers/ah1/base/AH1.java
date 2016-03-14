@@ -20,9 +20,6 @@ public class AH1 extends JavaPlugin implements Listener {
 
     private AHDatabase database;
     private Commands commands;
-    private BasicChunk basicChunk;
-    private LakeChunk lakeChunk;
-
     private Economy economy;
     private ChunkStorage chunkStorage;
 
@@ -47,8 +44,6 @@ public class AH1 extends JavaPlugin implements Listener {
         chunkStorage = new ChunkStorage(this);
 
         commands = new Commands(this);
-        basicChunk = new BasicChunk();
-        lakeChunk = new LakeChunk();
 
         if(getConfig().getBoolean("database.mysql.enabled")) {
             database.setConnectionInfo(
@@ -96,14 +91,5 @@ public class AH1 extends JavaPlugin implements Listener {
     public ChunkStorage getChunkStorage() {
         return chunkStorage;
     }
-
-    public BasicChunk getBasicChunk(){
-        return basicChunk;
-    }
-
-    public LakeChunk getLakeChunk(){
-        return lakeChunk;
-    }
-
 
 }
