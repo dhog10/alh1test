@@ -109,7 +109,7 @@ public class ChunkStorage {
     private void createTable() {
         PreparedStatement createChunkTable = null;
         try {
-            createChunkTable = plugin.getAHDatabase().getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + table + "(chunk VARCHAR(13) NOT NULL, owner VARCHAR(32) NOT NULL);");
+            createChunkTable = plugin.getAHDatabase().getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + table + "(chunk VARCHAR(13) NOT NULL, owner VARCHAR(37) NOT NULL);");
             createChunkTable.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
