@@ -40,6 +40,7 @@ public class MobDrops implements Listener {
         zombieDrops.put(new ItemStack(Material.REDSTONE, 2), 4 );
         zombieDrops.put(new ItemStack(Material.ROTTEN_FLESH, rand.nextInt(2)+1), 2 );
         zombieDrops.put(new ItemStack(Material.BOOK_AND_QUILL, 1), 80 );
+        zombieDrops.put(new ItemStack(Material.SAPLING , 1), 10 );
 
         //mobDrops.put(EntityType.CREEPER, new HashMap<>)
     }
@@ -64,6 +65,8 @@ public class MobDrops implements Listener {
                 return;
         }
         e.getDrops().clear();
+
+        //for()
     }
 
 }
