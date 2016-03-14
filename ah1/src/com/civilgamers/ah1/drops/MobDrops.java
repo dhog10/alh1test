@@ -37,13 +37,23 @@ public class MobDrops implements Listener {
         skeletonDrops.put(new ItemStack(Material.REDSTONE, 1), 10 );
         skeletonDrops.put(new ItemStack(Material.BONE, 2), 5 );
         skeletonDrops.put(new ItemStack(Material.BONE, 3), 5 );
-        skeletonDrops.put(new ItemStack(Material.BUCKET, 1), 30 );
+        skeletonDrops.put(new ItemStack(Material.BUCKET, 1), 35 );
+        skeletonDrops.put(new ItemStack(Material.IRON_SWORD, 1), 40 );
+        skeletonDrops.put(new ItemStack(Material.DIAMOND_SWORD, 1), 80 );
+        skeletonDrops.put(new ItemStack(Material.IRON_SPADE, 1), 30 );
+        skeletonDrops.put(new ItemStack(Material.IRON_AXE, 1), 40 );
+        skeletonDrops.put(new ItemStack(Material.IRON_PICKAXE, 1), 40 );
+        skeletonDrops.put(new ItemStack(Material.ARROW, 3), 4 );
+        skeletonDrops.put(new ItemStack(Material.BOW, 1), 15 );
 
         HashMap<ItemStack, Integer> zombieDrops = new HashMap<ItemStack, Integer>();
         zombieDrops.put(new ItemStack(Material.REDSTONE, 2), 4 );
         zombieDrops.put(new ItemStack(Material.ROTTEN_FLESH, 2), 2 );
         zombieDrops.put(new ItemStack(Material.BOOK_AND_QUILL, 1), 80 );
         zombieDrops.put(new ItemStack(Material.SAPLING , 1), 10 );
+        skeletonDrops.put(new ItemStack(Material.IRON_SPADE, 1), 30 );
+        skeletonDrops.put(new ItemStack(Material.IRON_AXE, 1), 40 );
+        skeletonDrops.put(new ItemStack(Material.IRON_PICKAXE, 1), 40 );
 
         mobDrops.put(EntityType.CREEPER, creeperDrops);
         mobDrops.put(EntityType.SKELETON, skeletonDrops);
