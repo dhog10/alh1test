@@ -29,6 +29,7 @@ public class MobDrops implements Listener {
         HashMap<ItemStack, Integer> spiderDrops = new HashMap<ItemStack, Integer>();
         spiderDrops.put(new ItemStack(Material.REDSTONE, 3), 5 );
         spiderDrops.put(new ItemStack(Material.WEB, rand.nextInt(2)+1), 4 );
+        spiderDrops.put(new ItemStack(Material.REDSTONE_BLOCK, 1), 60 );
 
         HashMap<ItemStack, Integer> skeletonDrops = new HashMap<ItemStack, Integer>();
         skeletonDrops.put(new ItemStack(Material.REDSTONE, 1), 10 );
