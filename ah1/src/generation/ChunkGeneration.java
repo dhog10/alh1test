@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.entity.EntityType;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -15,66 +16,39 @@ public class ChunkGeneration {
 
     Random rand = new Random();
 
-    void buildBlockBody(Location loc, Material surfaceType){
+    void buildBlockBody(Location loc, Material surfaceType, HashMap<Material, Integer> ores){
         for(int y = 80; y > 0; y--){
             loc.setY(y);
 
             if(y == 79) {
-                placeLayer(surfaceType, loc);
+                placeLayer(loc, Material.GRASS, 1);
             }
 
             if(y < 79 && y > 72) {
-                placeLayer(Material.DIRT, loc);
+                placeLayer(loc, Material.DIRT, 1);
             }
 
-            if(y <= 72) {
-                placeLayer(Material.STONE, loc);
-                placeIron(loc);
-                placeGold(loc);
-            }
-        }
-    }
-
-    void placeLayer(Material material, Location loc) {
-
-        //generate layer
-        Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-
-        for(int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                initialLoc.setZ(initialLoc.getZ() + 1);
-                initialLoc.getBlock().setType(material);
-            }
-            initialLoc.setX(initialLoc.getX() + 1);
-            initialLoc.setZ(loc.getZ());
-        }
-    }
-
-    void placeIron(Location loc){
-        //generate layer
-        Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
-
-        for(int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                initialLoc.setZ(initialLoc.getZ() + 1);
-                if(rand.nextInt(900) == 50) {
-                    initialLoc.getBlock().setType(Material.IRON_ORE);
+            if(y <= 72 && y > 1) {
+                placeLayer(loc, Material.STONE, 1);
+                for(Material m: ores.keySet()){
+                    placeLayer(loc, m, ores.get(m));
                 }
             }
-            initialLoc.setX(initialLoc.getX() + 1);
-            initialLoc.setZ(loc.getZ());
+            if(y == 1){
+                placeLayer(loc, Material.BEDROCK, 1);
+            }
         }
     }
 
-    void placeGold(Location loc){
+    void placeLayer(Location loc, Material oreType, int spawnChance){
         //generate layer
         Location initialLoc = new Location(Bukkit.getServer().getWorld("world"), loc.getX(), loc.getY(), loc.getZ());
 
         for(int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 initialLoc.setZ(initialLoc.getZ() + 1);
-                if(rand.nextInt(2000) == 50) {
-                    initialLoc.getBlock().setType(Material.GOLD_ORE);
+                if(rand.nextInt(spawnChance) == 0) {
+                    initialLoc.getBlock().setType(oreType);
                 }
             }
             initialLoc.setX(initialLoc.getX() + 1);

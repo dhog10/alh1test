@@ -7,6 +7,7 @@ import org.bukkit.TreeType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -14,52 +15,14 @@ import java.util.Random;
  */
 public class LakeChunk {
 
-    Random rand = new Random();
-    Material surfaceType = Material.GRASS;
-    Material lakeType;
-    ChunkGeneration chunkGeneration = new ChunkGeneration();
+    private Random rand = new Random();
+    private ChunkGeneration chunkGeneration = new ChunkGeneration();
+    private HashMap<Material, Integer> ores = new HashMap<Material, Integer>();
 
-    public void create(Player player) {
-        int startX = player.getLocation().getChunk().getBlock(0,0,0).getX();
-        int startZ = player.getLocation().getChunk().getBlock(0,0,0).getZ();
-        Location placeLocation = new Location(Bukkit.getServer().getWorld("world"),startX, 80, startZ);
-
-        // set lake type
-        if(rand.nextInt(10) == 1){
-            lakeType = Material.LAVA;
-        }else{
-            lakeType = Material.WATER;
-        }
-
-        chunkGeneration.buildBlockBody(placeLocation, surfaceType);
-
-        placeLocation.setY(80);
-        chunkGeneration.placeMobs(placeLocation);
-        chunkGeneration.placeGrass(placeLocation);
-        chunkGeneration.placeFlowers(placeLocation);
-        placeLocation.setY(79);
-        chunkGeneration.createLake(placeLocation, lakeType, surfaceType);
-        placeLocation.setY(80);
-        chunkGeneration.placeTrees(placeLocation);
-    }
-
-    public void create(Player player, Material lakeType) {
-        int startX = player.getLocation().getChunk().getBlock(0,0,0).getX();
-        int startZ = player.getLocation().getChunk().getBlock(0,0,0).getZ();
-        Location placeLocation = new Location(Bukkit.getServer().getWorld("world"),startX, 80, startZ);
-
-        // set lake type
-        this.lakeType = lakeType;
-
-        chunkGeneration.buildBlockBody(placeLocation, surfaceType);
-
-        placeLocation.setY(80);
-        chunkGeneration.placeGrass(placeLocation);
-        chunkGeneration.placeFlowers(placeLocation);
-        placeLocation.setY(79);
-        chunkGeneration.createLake(placeLocation, lakeType, surfaceType);
-        placeLocation.setY(80);
-        chunkGeneration.placeTrees(placeLocation);
+    public LakeChunk(){
+        ores.put(Material.STONE, 1);
+        ores.put(Material.IRON_ORE, 900);
+        ores.put(Material.GOLD_ORE, 2000);
     }
 
     public void create(Player player, Material lakeType, Material surfaceType) {
@@ -67,11 +30,7 @@ public class LakeChunk {
         int startZ = player.getLocation().getChunk().getBlock(0,0,0).getZ();
         Location placeLocation = new Location(Bukkit.getServer().getWorld("world"),startX, 80, startZ);
 
-        // set lake type
-        this.lakeType = lakeType;
-        this.surfaceType = surfaceType;
-
-        chunkGeneration.buildBlockBody(placeLocation, surfaceType);
+        chunkGeneration.buildBlockBody(placeLocation, surfaceType, ores);
 
         placeLocation.setY(80);
         chunkGeneration.placeGrass(placeLocation);
