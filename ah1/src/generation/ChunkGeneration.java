@@ -24,12 +24,11 @@ public class ChunkGeneration {
                 placeLayer(loc, Material.GRASS, 1);
             }
 
-            if(y < 79 && y > 72) {
+            if(y < 79 && y > 74) {
                 placeLayer(loc, Material.DIRT, 1);
             }
 
-            if(y <= 72 && y > 1) {
-                placeLayer(loc, Material.STONE, 1);
+            if(y <= 74 && y > 1) {
                 for(Material m: ores.keySet()){
                     placeLayer(loc, m, ores.get(m));
                 }

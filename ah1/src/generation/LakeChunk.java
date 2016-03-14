@@ -23,6 +23,7 @@ public class LakeChunk {
         ores.put(Material.STONE, 1);
         ores.put(Material.IRON_ORE, 900);
         ores.put(Material.GOLD_ORE, 2000);
+        ores.put(Material.DIAMOND_ORE, 7500);
     }
 
     public void create(Player player, Material lakeType, Material surfaceType) {
