@@ -25,23 +25,30 @@ public class MobDrops implements Listener {
         HashMap<ItemStack, Integer> creeperDrops = new HashMap<ItemStack, Integer>();
         creeperDrops.put(new ItemStack(Material.SLIME_BALL), 150 );
         creeperDrops.put(new ItemStack(Material.REDSTONE, 3), 10 );
+        creeperDrops.put(new ItemStack(Material.SAPLING, 1), 2 );
 
         HashMap<ItemStack, Integer> spiderDrops = new HashMap<ItemStack, Integer>();
         spiderDrops.put(new ItemStack(Material.REDSTONE, 3), 5 );
-        spiderDrops.put(new ItemStack(Material.WEB, rand.nextInt(2)+1), 4 );
+        spiderDrops.put(new ItemStack(Material.WEB, 1), 6 );
+        spiderDrops.put(new ItemStack(Material.WEB, 2), 6 );
         spiderDrops.put(new ItemStack(Material.REDSTONE_BLOCK, 1), 60 );
 
         HashMap<ItemStack, Integer> skeletonDrops = new HashMap<ItemStack, Integer>();
         skeletonDrops.put(new ItemStack(Material.REDSTONE, 1), 10 );
-        skeletonDrops.put(new ItemStack(Material.BONE, rand.nextInt(3)+1), 3 );
+        skeletonDrops.put(new ItemStack(Material.BONE, 2), 5 );
+        skeletonDrops.put(new ItemStack(Material.BONE, 3), 5 );
         skeletonDrops.put(new ItemStack(Material.BUCKET, 1), 30 );
 
         HashMap<ItemStack, Integer> zombieDrops = new HashMap<ItemStack, Integer>();
         zombieDrops.put(new ItemStack(Material.REDSTONE, 2), 4 );
-        zombieDrops.put(new ItemStack(Material.ROTTEN_FLESH, rand.nextInt(2)+1), 2 );
+        zombieDrops.put(new ItemStack(Material.ROTTEN_FLESH, 2), 2 );
         zombieDrops.put(new ItemStack(Material.BOOK_AND_QUILL, 1), 80 );
+        zombieDrops.put(new ItemStack(Material.SAPLING , 1), 10 );
 
-        //mobDrops.put(EntityType.CREEPER, new HashMap<>)
+        mobDrops.put(EntityType.CREEPER, creeperDrops);
+        mobDrops.put(EntityType.SKELETON, skeletonDrops);
+        mobDrops.put(EntityType.ZOMBIE, zombieDrops);
+        mobDrops.put(EntityType.SPIDER, spiderDrops);
     }
 
     @EventHandler
@@ -64,6 +71,13 @@ public class MobDrops implements Listener {
                 return;
         }
         e.getDrops().clear();
-    }
 
+        HashMap<ItemStack, Integer> drops = mobDrops.get(e.getEntityType());
+
+        for(ItemStack i : drops.keySet()) {
+            if(rand.nextInt(drops.get(i)) == 0){
+                Bukkit.getWorld("world").dropItemNaturally(e.getEntity().getLocation(), i);
+            }
+        }
+    }
 }
