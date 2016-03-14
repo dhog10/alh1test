@@ -14,33 +14,69 @@ import java.util.Random;
 public class LakeChunk {
 
     Random rand = new Random();
+    Material surfaceType = Material.GRASS;
+    Material lakeType;
 
     public void create(Player player) {
         int startX = player.getLocation().getChunk().getBlock(0,0,0).getX();
         int startZ = player.getLocation().getChunk().getBlock(0,0,0).getZ();
         Location placeLocation = new Location(Bukkit.getServer().getWorld("world"),startX, 80, startZ);
-        for(int y = 80; y > 0; y--){
-            placeLocation.setY(y);
 
-            if(y == 79) {
-                placeLayer(Material.GRASS, placeLocation);
-            }
-
-            if(y < 79 && y > 72) {
-                placeLayer(Material.DIRT, placeLocation);
-            }
-
-            if(y <= 72) {
-                placeLayer(Material.STONE, placeLocation);
-                placeIron(placeLocation);
-                placeGold(placeLocation);
-            }
+        // set lake type
+        if(rand.nextInt(10) == 1){
+            lakeType = Material.LAVA;
+        }else{
+            lakeType = Material.WATER;
         }
+
+        buildBlockBody(placeLocation);
+
         placeLocation.setY(80);
         placeGrass(placeLocation);
         placeFlowers(placeLocation);
+        placeLocation.setY(79);
         createLake(placeLocation);
+        placeLocation.setY(80);
         placeTrees(placeLocation);
+    }
+
+    public void create(Player player, Material lakeType) {
+        int startX = player.getLocation().getChunk().getBlock(0,0,0).getX();
+        int startZ = player.getLocation().getChunk().getBlock(0,0,0).getZ();
+        Location placeLocation = new Location(Bukkit.getServer().getWorld("world"),startX, 80, startZ);
+
+        // set lake type
+        this.lakeType = lakeType;
+
+        buildBlockBody(placeLocation);
+
+        placeLocation.setY(80);
+        placeGrass(placeLocation);
+        placeFlowers(placeLocation);
+        placeLocation.setY(79);
+        createLake(placeLocation);
+        placeLocation.setY(80);
+        placeTrees(placeLocation);
+    }
+
+    private void buildBlockBody(Location loc){
+        for(int y = 80; y > 0; y--){
+            loc.setY(y);
+
+            if(y == 79) {
+                placeLayer(surfaceType, loc);
+            }
+
+            if(y < 79 && y > 72) {
+                placeLayer(Material.DIRT, loc);
+            }
+
+            if(y <= 72) {
+                placeLayer(Material.STONE, loc);
+                placeIron(loc);
+                placeGold(loc);
+            }
+        }
     }
 
     private void placeLayer(Material material, Location loc) {
@@ -143,34 +179,50 @@ public class LakeChunk {
     }
 
     private int lakeWidthX, lakeWidthZ;
-    private Material lakeType;
-    private int push;
+    private int lakeStartX, lakeStartZ;
     private void createLake(Location loc){
         Location tempLakeLocation = loc.clone();
-        tempLakeLocation.setX(tempLakeLocation.getX() + rand.nextInt(4) + 2);
-        tempLakeLocation.setZ(tempLakeLocation.getZ() + rand.nextInt(4) + 2);
         tempLakeLocation.setY(79);
-        lakeWidthX = rand.nextInt(4) + 5;
-        lakeWidthZ = rand.nextInt(4) + 5;
-        push = 0;
+        lakeWidthX = rand.nextInt(4) + 4;
+        lakeWidthZ = rand.nextInt(4) + 4;
 
-        // set lake type
-        if(rand.nextInt(10) == 1){
-            lakeType = Material.LAVA;
-        }else{
-            lakeType = Material.WATER;
-        }
+        lakeStartX = rand.nextInt(3) + 3;
+        lakeStartZ = rand.nextInt(3) + 3;
 
-        for(int x = 0; x < lakeWidthX; x++){
-            for(int z = 0; z < lakeWidthZ; z++){
-                tempLakeLocation.setX(tempLakeLocation.getX() + 1);
-                if(z == 0){
-                    tempLakeLocation.setZ(tempLakeLocation.getZ() + 1);
+        for(int x = 0; x < lakeWidthX; x++) {
+            for (int z = 0; z < lakeWidthZ; z++) {
+                tempLakeLocation = loc.clone();
+                tempLakeLocation.setX((tempLakeLocation.getX() + x) + lakeStartX);
+                tempLakeLocation.setZ((tempLakeLocation.getZ() + z) + lakeStartZ);
+                if(!(x == 0 && z == 0) && !(x == 0 && z == lakeWidthZ - 1) && !(x == lakeWidthX - 1 && z == 0) && !(x == lakeWidthX - 1 && z == lakeWidthZ - 1)){
+                    if((x == 1 && z == 0) || (x == 0 && z == 1) || (x == 1 && z == lakeWidthZ - 1) || (x == 0 && z == lakeWidthZ - 2) ||(x == lakeWidthX - 1 && z == 1) || (x == lakeWidthX - 2 && z == 0) || (x == lakeWidthX - 2 && z == lakeWidthZ - 1) || (x == lakeWidthX - 1 && z == lakeWidthZ -2)){
+                        if(rand.nextInt(2) == 1){
+                            tempLakeLocation.getBlock().setType(lakeType);
+                        }else{
+                            placeReed(tempLakeLocation);
+                        }
+                    }else{
+                        tempLakeLocation.getBlock().setType(lakeType);
+                        if(rand.nextInt(7) == 1 && lakeType != Material.LAVA){
+                            tempLakeLocation.setY(tempLakeLocation.getY() + 1);
+                            tempLakeLocation.getBlock().setType(Material.WATER_LILY);
+                        }
+                    }
                 }
-                tempLakeLocation.setZ(tempLakeLocation.getZ() + 1);
-                tempLakeLocation.getBlock().setType(lakeType);
             }
         }
     }
 
+    private void placeReed(Location placeReedLocation){
+        int caneHeight = rand.nextInt(2) + 3;
+        for(int i = 0; i < caneHeight; i++){
+            Location tempReedLoc = placeReedLocation.clone();
+            tempReedLoc.setY(tempReedLoc.getY() + i);
+            if(i == 0){
+                tempReedLoc.getBlock().setType(surfaceType);
+            }else {
+                tempReedLoc.getBlock().setType(Material.SUGAR_CANE_BLOCK);
+            }
+        }
+    }
 }

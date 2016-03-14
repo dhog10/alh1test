@@ -4,6 +4,7 @@ import com.civilgamers.ah1.base.AH1;
 import com.civilgamers.ah1.base.Util;
 import generation.BasicChunk;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -53,7 +54,11 @@ public class Commands implements CommandExecutor {
             Util.msg(player, "Creating lake chunk...");
             plugin.getLakeChunk().create(player);
             Util.msg(player, "Placed lake chunk at you...");
-        } else {
+        }else if(command.equalsIgnoreCase("placelavalake")){
+            Util.msg(player, "Creating lava lake chunk...");
+            plugin.getLakeChunk().create(player, Material.LAVA);
+            Util.msg(player, "Placed lava lake chunk at you...");
+        } else{
             Util.msg(player, "Command not recognised! Type /help for all available commands.");
         }
         return true;
