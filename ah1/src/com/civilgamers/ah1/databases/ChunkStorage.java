@@ -121,4 +121,8 @@ public class ChunkStorage {
             }
         }
     }
+
+    public String chunkToString(int x, int y) {
+        return x + ":" + y;
+    }
 }
