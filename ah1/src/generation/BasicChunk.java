@@ -133,7 +133,7 @@ public class BasicChunk {
 
     private void placeTrees(Location loc){
         Location tempTreeLocation;
-        int numOfTrees = rand.nextInt(2) + 2;
+        int numOfTrees = rand.nextInt(2) + 4;
         for(int i = 0; i <= numOfTrees; i++){
             tempTreeLocation = loc.clone();
             tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(13) + 2);
@@ -144,47 +144,38 @@ public class BasicChunk {
     }
 
     private Location tempMobSpawnLocation;
+    private int mobNumber;
+    private int amountOfMobs;
     private void placeMobs(Location loc){
-        for(int i = 0; i < 5; i++) {
+        amountOfMobs = rand.nextInt(2) + 6;
+        for(int i = 0; i < amountOfMobs; i++) {
+            int counter = 0;
             while(true){
                 tempMobSpawnLocation = loc.clone();
                 tempMobSpawnLocation.setX(tempMobSpawnLocation.getX() + rand.nextInt(11) + 3);
                 tempMobSpawnLocation.setZ(tempMobSpawnLocation.getZ() + rand.nextInt(11) + 3);
+                counter++;
                 if(tempMobSpawnLocation.getBlock().getType() == Material.AIR){
                     break;
                 }
+                if(counter > 50){
+                    break;
+                }
             }
-            switch(rand.nextInt(8)){
-                case 0:
-                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
-                    break;
-                case 1:
-                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
-                    break;
-                case 2:
-                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
-                    break;
-                case 3:
-                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.PIG);
-                    break;
-                case 4:
-                    if(rand.nextInt(10) == 1){
-                        Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.MUSHROOM_COW);
-                    }else {
-                        Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.COW);
-                    }
-                    break;
-                case 5:
-                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
-                    break;
-                case 6:
-                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
-                    break;
-                case 7:
-                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
-                    break;
-                default:
-                    break;
+
+            mobNumber = rand.nextInt(100);
+            if(mobNumber  <= 10){
+                Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.PIG);
+            }else if(mobNumber <=20){
+                if(rand.nextInt(25) == 1){
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.MUSHROOM_COW);
+                }else {
+                    Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.COW);
+                }
+            }else if(mobNumber <=30) {
+                Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.SHEEP);
+            }else{
+                Bukkit.getWorld("world").spawnEntity(tempMobSpawnLocation, EntityType.CHICKEN);
             }
         }
     }
