@@ -33,9 +33,11 @@ public class Commands implements CommandExecutor {
                     playerAdvertCommand(player, args[0]);
                 }
             } else if (cmd.getName().equalsIgnoreCase("createchunk")) {
-                Util.msg(player, "Creating basic chunk...");
-                new BasicChunk(plugin, player).create(Material.GRASS);
-                Util.msg(player, "Placed basic chunk at you...");
+                Util.msg(player, "Attempting to place a basic chunk...");
+                if(new BasicChunk(plugin, player).create(Material.GRASS))
+                    Util.msg(player, "&6Chunk successfully generated");
+                else
+                    Util.msg(player, "&cA chunk already exists here");
             } else if (cmd.getName().equalsIgnoreCase("ah")) {
                 if(args.length == 0){
                     printHelp(player);
@@ -53,12 +55,16 @@ public class Commands implements CommandExecutor {
             Util.msg(player, "Your balance is: " + plugin.getEconomy().getBalance(player.getUniqueId().toString()));
         } else if (command.equalsIgnoreCase("placelake")) {
             Util.msg(player, "Creating lake chunk...");
-            new LakeChunk(plugin, player).create(Material.WATER, Material.GRASS);
-            Util.msg(player, "Placed lake chunk at you...");
+            if(new LakeChunk(plugin, player).create(Material.WATER, Material.GRASS))
+                Util.msg(player, "&6Chunk successfully generated");
+            else
+                Util.msg(player, "&cA chunk already exists here");
         }else if(command.equalsIgnoreCase("placelavalake")){
-            Util.msg(player, "Creating lava lake chunk...");
-            new LakeChunk(plugin, player).create(Material.LAVA, Material.GRASS);
-            Util.msg(player, "Placed lava lake chunk at you...");
+            Util.msg(player, "Creating lake chunk...");
+            if(new LakeChunk(plugin, player).create(Material.LAVA, Material.GRASS))
+                Util.msg(player, "&6Chunk successfully generated");
+            else
+                Util.msg(player, "&cA chunk already exists here");
         } else{
             Util.msg(player, "Command not recognised! Type /help for all available commands.");
         }
