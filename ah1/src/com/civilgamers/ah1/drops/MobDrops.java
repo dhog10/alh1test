@@ -42,7 +42,10 @@ public class MobDrops implements Listener {
         zombieDrops.put(new ItemStack(Material.BOOK_AND_QUILL, 1), 80 );
         zombieDrops.put(new ItemStack(Material.SAPLING , 1), 10 );
 
-        //mobDrops.put(EntityType.CREEPER, new HashMap<>)
+        mobDrops.put(EntityType.CREEPER, creeperDrops);
+        mobDrops.put(EntityType.SKELETON, skeletonDrops);
+        mobDrops.put(EntityType.ZOMBIE, zombieDrops);
+        mobDrops.put(EntityType.SPIDER, spiderDrops);
     }
 
     @EventHandler
@@ -66,7 +69,12 @@ public class MobDrops implements Listener {
         }
         e.getDrops().clear();
 
-        //for()
-    }
+        HashMap<ItemStack, Integer> drops = mobDrops.get(e.getEntityType());
 
+        for(ItemStack i : drops.keySet()) {
+            if(rand.nextInt(drops.get(i)) == 0){
+                Bukkit.getWorld("world").dropItemNaturally(e.getEntity().getLocation(), i);
+            }
+        }
+    }
 }

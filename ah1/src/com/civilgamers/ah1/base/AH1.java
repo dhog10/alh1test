@@ -7,6 +7,8 @@ import com.civilgamers.ah1.commands.Commands;
 import com.civilgamers.ah1.databases.AHDatabase;
 import com.civilgamers.ah1.databases.ChunkStorage;
 import com.civilgamers.ah1.databases.Economy;
+import com.civilgamers.ah1.drops.BlockDrops;
+import com.civilgamers.ah1.drops.MobDrops;
 import generation.BasicChunk;
 import generation.LakeChunk;
 import org.bukkit.Location;
@@ -74,6 +76,8 @@ public class AH1 extends JavaPlugin implements Listener {
                 //tempLoc.getBlock().setType(Material.GRASS);
             }
         }
+        getServer().getPluginManager().registerEvents(new MobDrops(), this);
+        getServer().getPluginManager().registerEvents(new BlockDrops(), this);
     }
 
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
