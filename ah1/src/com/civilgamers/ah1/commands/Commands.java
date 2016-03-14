@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 /**
@@ -65,7 +67,15 @@ public class Commands implements CommandExecutor {
                 Util.msg(player, "&6Chunk successfully generated");
             else
                 Util.msg(player, "&cA chunk already exists here");
-        } else{
+        } else if(command.equalsIgnoreCase("slayall")) {
+            for(Entity i : plugin.getServer().getWorld("world").getEntities()) {
+                if(i.getType() != EntityType.PLAYER) {
+                    i.setFallDistance(10000f);
+                }
+            }
+            Util.msg(player, "Killed all mobs (should have)");
+        }
+        else{
             Util.msg(player, "Command not recognised! Type /help for all available commands.");
         }
         return true;
