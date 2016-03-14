@@ -111,7 +111,7 @@ public class Economy {
     private void createTable() {
         PreparedStatement createEconomyTable = null;
         try {
-            createEconomyTable = plugin.getAHDatabase().getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + table + "(uid VARCHAR NOT NULL, balance INTEGER NOT NULL);");
+            createEconomyTable = plugin.getAHDatabase().getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + table + "(uid VARCHAR(37) NOT NULL, balance INTEGER(12) NOT NULL);");
             createEconomyTable.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
