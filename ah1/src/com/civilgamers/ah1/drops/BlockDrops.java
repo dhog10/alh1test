@@ -3,6 +3,7 @@ package com.civilgamers.ah1.drops;
 import com.civilgamers.ah1.base.AH1;
 import com.civilgamers.ah1.base.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -46,7 +47,7 @@ public class BlockDrops implements Listener {
     }
 
     @EventHandler
-    public void onBlockBreak(final BlockBreakEvent e){
+    public void onBlockBreak(BlockBreakEvent e){
 
         // stop if its not these blocks
         if(e.getBlock().getType() != Material.STONE && e.getBlock().getType() != Material.GRASS && e.getBlock().getType() != Material.DIRT){
@@ -58,7 +59,7 @@ public class BlockDrops implements Listener {
         e.getBlock().getDrops().clear();
 
         final HashMap<ItemStack, Integer> drops = blockDrops.get(blockMaterial);
-
+        final Location loc = e.getBlock().getLocation().clone();
         // drop replacement
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 
@@ -66,7 +67,7 @@ public class BlockDrops implements Listener {
             public void run() {
                 for(ItemStack i: drops.keySet()){
                     if(rand.nextInt(drops.get(i)) == 0){
-                        Bukkit.getWorld("world").dropItem(e.getBlock().getLocation(), i);
+                        Bukkit.getWorld("world").dropItem(loc, i);
                     }
                 }
             }
