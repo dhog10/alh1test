@@ -59,7 +59,7 @@ public class BlockDrops implements Listener {
 
         for(ItemStack i: drops.keySet()){
             if(rand.nextInt(drops.get(i)) == 0){
-                Bukkit.getWorld("world").dropItem(e.getBlock().getLocation(), i);
+                e.getBlock().getDrops().add(i);
             }
         }
     }
