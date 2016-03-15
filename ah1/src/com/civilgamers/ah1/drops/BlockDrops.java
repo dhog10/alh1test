@@ -56,21 +56,19 @@ public class BlockDrops implements Listener {
 
         // cancel original drop
         Material blockMaterial = e.getBlock().getType();
-        e.getBlock().getDrops().clear();
+        e.getBlock().setType(Material.AIR);
 
         final HashMap<ItemStack, Integer> drops = blockDrops.get(blockMaterial);
         final Location loc = e.getBlock().getLocation().clone();
+        loc.setX(loc.getX() + 0.5);
+        loc.setY(loc.getY() + 0.5);
+        loc.setZ(loc.getZ() + 0.5);
         // drop replacement
-        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 
-            @Override
-            public void run() {
-                for(ItemStack i: drops.keySet()){
-                    if(rand.nextInt(drops.get(i)) == 0){
-                        Bukkit.getWorld("world").dropItem(loc, i);
-                    }
-                }
+        for(ItemStack i: drops.keySet()){
+            if(rand.nextInt(drops.get(i)) == 0){
+                Bukkit.getWorld("world").dropItem(loc, i);
             }
-        }, 1l);
+        }
     }
 }

@@ -116,7 +116,11 @@ public class ChunkGeneration {
                         break;
                     }
                 }
-                Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
+                if(rand.nextInt(4) == 0){
+                    Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.BIRCH);
+                }else {
+                    Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
+                }
             }
         }else{
             numOfTrees = rand.nextInt(2) + 5;

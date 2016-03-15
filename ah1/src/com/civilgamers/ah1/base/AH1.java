@@ -74,7 +74,7 @@ public class AH1 extends JavaPlugin implements Listener {
             }
         }
         getServer().getPluginManager().registerEvents(new MobDrops(), this);
-        getServer().getPluginManager().registerEvents(new BlockDrops(), this);
+        getServer().getPluginManager().registerEvents(new BlockDrops(this), this);
     }
 
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
