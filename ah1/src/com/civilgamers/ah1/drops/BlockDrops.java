@@ -52,8 +52,7 @@ public class BlockDrops implements Listener {
 
         // cancel original drop
         Material blockMaterial = e.getBlock().getType();
-        e.getBlock().getLocation().getBlock().setType(Material.AIR);
-        e.setCancelled(true);
+        e.getBlock().setType(Material.AIR);
 
         // drop replacement
         HashMap<ItemStack, Integer> drops = blockDrops.get(blockMaterial);
