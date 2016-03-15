@@ -1,15 +1,10 @@
-package generation;
+package com.civilgamers.ah1.generation;
 
 import com.civilgamers.ah1.base.AH1;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.TreeType;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-
-import java.util.HashMap;
-import java.util.Random;
 
 /**
  * Created by Daniel on 13/03/2016.
