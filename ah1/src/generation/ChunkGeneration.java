@@ -24,7 +24,7 @@ public class ChunkGeneration {
                 placeLayer(loc, Material.GRASS, 1);
             }
 
-            if(y < 79 && y > 75) {
+            if(y < 79 && y >= 76) {
                 placeLayer(loc, Material.DIRT, 1);
             }
 
@@ -32,6 +32,9 @@ public class ChunkGeneration {
                 for(Material m: ores.keySet()){
                     placeLayer(loc, m, ores.get(m));
                 }
+            }
+            if(y == 2){
+                placeLayer(loc, Material.BEDROCK, 2);
             }
             if(y == 1){
                 placeLayer(loc, Material.BEDROCK, 1);
@@ -95,15 +98,36 @@ public class ChunkGeneration {
         }
     }
 
+    private int numOfTrees;
     void placeTrees(Location loc){
         Location tempTreeLocation;
-        int numOfTrees = rand.nextInt(2) + 4;
-        for(int i = 0; i <= numOfTrees; i++){
+        if(rand.nextInt(11) == 1){
+            int numOfTrees = 2;
             tempTreeLocation = loc.clone();
-            tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(13) + 2);
-            tempTreeLocation.setZ(tempTreeLocation.getZ() + rand.nextInt(13) + 2);
-            Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
+            tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(7) + 5);
+            tempTreeLocation.setZ(tempTreeLocation.getZ() + rand.nextInt(7) + 5);
+            Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.JUNGLE);
+            for(int i = 0; i <= numOfTrees; i++){
+                while(true) {
+                    tempTreeLocation = loc.clone();
+                    tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(13) + 2);
+                    tempTreeLocation.setZ(tempTreeLocation.getZ() + rand.nextInt(13) + 2);
+                    if(tempTreeLocation.getBlock().getType() == Material.AIR || tempTreeLocation.getBlock().getType() == Material.LONG_GRASS || tempTreeLocation.getBlock().getType() == Material.RED_ROSE){
+                        break;
+                    }
+                }
+                Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
+            }
+        }else{
+            numOfTrees = rand.nextInt(2) + 4;
+            for(int i = 0; i <= numOfTrees; i++){
+                tempTreeLocation = loc.clone();
+                tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(13) + 2);
+                tempTreeLocation.setZ(tempTreeLocation.getZ() + rand.nextInt(13) + 2);
+                Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
+            }
         }
+
     }
 
     private int lakeWidthX, lakeWidthZ;
