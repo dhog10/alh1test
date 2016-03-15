@@ -1,5 +1,6 @@
 package com.civilgamers.ah1.drops;
 
+import com.civilgamers.ah1.base.AH1;
 import com.civilgamers.ah1.base.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,12 +17,14 @@ import java.util.Random;
  * Created by Daniel on 14/03/2016.
  */
 public class BlockDrops implements Listener {
+    private AH1 plugin;
 
     Random rand = new Random();
 
     HashMap<Material, HashMap<ItemStack, Integer>> blockDrops = new HashMap<Material, HashMap<ItemStack, Integer>>();
 
-    public BlockDrops(){
+    public BlockDrops(AH1 plugin){
+        this.plugin = plugin;
 
         HashMap<ItemStack, Integer> smoothStoneDrops = new HashMap<ItemStack, Integer>();
         smoothStoneDrops.put(new ItemStack(Material.COBBLESTONE, 1), 1);
@@ -43,7 +46,7 @@ public class BlockDrops implements Listener {
     }
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent e){
+    public void onBlockBreak(final BlockBreakEvent e){
 
         // stop if its not these blocks
         if(e.getBlock().getType() != Material.STONE && e.getBlock().getType() != Material.GRASS && e.getBlock().getType() != Material.DIRT){
@@ -52,15 +55,21 @@ public class BlockDrops implements Listener {
 
         // cancel original drop
         Material blockMaterial = e.getBlock().getType();
-        e.getBlock().setType(Material.AIR);
+        e.getBlock().getDrops().clear();
+
+        final HashMap<ItemStack, Integer> drops = blockDrops.get(blockMaterial);
 
         // drop replacement
-        HashMap<ItemStack, Integer> drops = blockDrops.get(blockMaterial);
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 
-        for(ItemStack i: drops.keySet()){
-            if(rand.nextInt(drops.get(i)) == 0){
-                e.getBlock().getDrops().add(i);
+            @Override
+            public void run() {
+                for(ItemStack i: drops.keySet()){
+                    if(rand.nextInt(drops.get(i)) == 0){
+                        Bukkit.getWorld("world").dropItem(e.getBlock().getLocation(), i);
+                    }
+                }
             }
-        }
+        }, 1l);
     }
 }
