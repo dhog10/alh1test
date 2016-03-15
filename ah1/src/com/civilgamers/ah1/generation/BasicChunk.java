@@ -17,6 +17,9 @@ public class BasicChunk extends AHChunk {
         ores.put(Material.STONE, 1);
         ores.put(Material.IRON_ORE, 900);
         ores.put(Material.GOLD_ORE, 2000);
+        ores.put(Material.QUARTZ_ORE, 3500);
+        ores.put(Material.LAPIS_ORE, 3500);
+        ores.put(Material.EMERALD_ORE, 4500);
         ores.put(Material.DIAMOND_ORE, 7500);
     }
 

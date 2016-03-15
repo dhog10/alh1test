@@ -102,7 +102,7 @@ public class ChunkGeneration {
     void placeTrees(Location loc){
         Location tempTreeLocation;
         if(rand.nextInt(11) == 1){
-            int numOfTrees = 2;
+            int numOfTrees = 3;
             tempTreeLocation = loc.clone();
             tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(7) + 5);
             tempTreeLocation.setZ(tempTreeLocation.getZ() + rand.nextInt(7) + 5);
@@ -119,7 +119,7 @@ public class ChunkGeneration {
                 Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
             }
         }else{
-            numOfTrees = rand.nextInt(2) + 4;
+            numOfTrees = rand.nextInt(2) + 5;
             for(int i = 0; i <= numOfTrees; i++){
                 tempTreeLocation = loc.clone();
                 tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(13) + 2);
@@ -221,7 +221,11 @@ public class ChunkGeneration {
                 tempMobSpawnLocation.setZ(tempMobSpawnLocation.getZ() + rand.nextInt(11) + 3);
                 counter++;
                 if(tempMobSpawnLocation.getBlock().getType() == Material.AIR){
-                    break;
+                    Location tempMobSpawnLocation2 = tempMobSpawnLocation.clone();
+                    tempMobSpawnLocation2.setY(tempMobSpawnLocation2.getY() + 1);
+                    if(tempMobSpawnLocation2.getBlock().getType() == Material.AIR){
+                        break;
+                    }
                 }
                 if(counter > 50){
                     break;

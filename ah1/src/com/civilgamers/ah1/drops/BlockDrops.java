@@ -1,5 +1,6 @@
 package com.civilgamers.ah1.drops;
 
+import com.civilgamers.ah1.base.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -23,29 +24,44 @@ public class BlockDrops implements Listener {
     public BlockDrops(){
 
         HashMap<ItemStack, Integer> smoothStoneDrops = new HashMap<ItemStack, Integer>();
-        smoothStoneDrops.put(new ItemStack(Material.REDSTONE, 1), 1);
+        smoothStoneDrops.put(new ItemStack(Material.COBBLESTONE, 1), 1);
+        smoothStoneDrops.put(new ItemStack(Material.COAL, 1), 50);
 
+        HashMap<ItemStack, Integer> grassDrops = new HashMap<ItemStack, Integer>();
+        grassDrops.put(new ItemStack(Material.DIRT, 1), 1);
+        grassDrops.put(new ItemStack(Material.REDSTONE, 1), 13);
+        grassDrops.put(new ItemStack(Material.SEEDS, 1), 8);
+
+        HashMap<ItemStack, Integer> dirtDrops = new HashMap<ItemStack, Integer>();
+        dirtDrops.put(new ItemStack(Material.DIRT, 1), 1);
+        dirtDrops.put(new ItemStack(Material.REDSTONE, 1), 17);
+        dirtDrops.put(new ItemStack(Material.SEEDS, 1), 15);
+
+        blockDrops.put(Material.DIRT, dirtDrops);
         blockDrops.put(Material.STONE, smoothStoneDrops);
+        blockDrops.put(Material.GRASS, grassDrops);
     }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
 
         // stop if its not these blocks
-        if(e.getBlock().getType() != Material.STONE){
+        if(e.getBlock().getType() != Material.STONE && e.getBlock().getType() != Material.GRASS && e.getBlock().getType() != Material.DIRT){
             return;
         }
 
-        // drop replacement
-        e.getBlock().getDrops().clear();
+        // cancel original drop
+        Material blockMaterial = e.getBlock().getType();
+        e.getBlock().getLocation().getBlock().setType(Material.AIR);
+        e.setCancelled(true);
 
-        HashMap<ItemStack, Integer> drops = new HashMap<ItemStack, Integer>();
+        // drop replacement
+        HashMap<ItemStack, Integer> drops = blockDrops.get(blockMaterial);
 
         for(ItemStack i: drops.keySet()){
             if(rand.nextInt(drops.get(i)) == 0){
-                Bukkit.getWorld("world").dropItemNaturally(e.getBlock().getLocation(), i);
+                Bukkit.getWorld("world").dropItem(e.getBlock().getLocation(), i);
             }
         }
-
     }
 }
