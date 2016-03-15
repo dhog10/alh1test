@@ -116,7 +116,7 @@ public class ChunkGeneration {
                         break;
                     }
                 }
-                if(rand.nextInt(4) == 0){
+                if(rand.nextInt(4) == 1){
                     Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.BIRCH);
                 }else {
                     Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
@@ -128,7 +128,11 @@ public class ChunkGeneration {
                 tempTreeLocation = loc.clone();
                 tempTreeLocation.setX(tempTreeLocation.getX() + rand.nextInt(13) + 2);
                 tempTreeLocation.setZ(tempTreeLocation.getZ() + rand.nextInt(13) + 2);
-                Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
+                if(rand.nextInt(4) == 1){
+                    Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.BIRCH);
+                }else {
+                    Bukkit.getWorld("world").generateTree(tempTreeLocation, TreeType.TREE);
+                }
             }
         }
 
