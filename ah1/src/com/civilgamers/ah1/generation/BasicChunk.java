@@ -37,6 +37,7 @@ public class BasicChunk extends AHChunk {
         chunkGeneration.placeGrass(placeLocation);
         chunkGeneration.placeFlowers(placeLocation);
         chunkGeneration.placeTrees(placeLocation);
+        chunkGeneration.placeBorderFences(placeLocation);
 
         registerChunk();
         return true;

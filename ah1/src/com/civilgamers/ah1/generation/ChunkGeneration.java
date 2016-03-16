@@ -1,9 +1,8 @@
 package com.civilgamers.ah1.generation;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.TreeType;
+import com.civilgamers.ah1.base.AH1;
+import com.civilgamers.ah1.base.Util;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 
 import java.util.HashMap;
@@ -14,7 +13,12 @@ import java.util.Random;
  */
 public class ChunkGeneration {
 
-    Random rand = new Random();
+    private Random rand = new Random();
+    private AH1 plugin;
+
+    public ChunkGeneration(AH1 ah1){
+        this.plugin = ah1;
+    }
 
     void buildBlockBody(Location loc, Material surfaceType, HashMap<Material, Integer> ores){
         for(int y = 80; y > 0; y--){
@@ -26,6 +30,7 @@ public class ChunkGeneration {
 
             if(y < 79 && y >= 76) {
                 placeLayer(loc, Material.DIRT, 1);
+                placeLayer(loc, Material.SAND, 6);
             }
 
             if(y <= 75 && y > 1) {
@@ -50,7 +55,13 @@ public class ChunkGeneration {
             for (int z = 0; z < 16; z++) {
                 initialLoc.setZ(initialLoc.getZ() + 1);
                 if(rand.nextInt(spawnChance) == 0) {
-                    initialLoc.getBlock().setType(oreType);
+                    if(oreType == Material.SAND){
+                        if(x != 0 && x != 15 && z != 0 && z != 15){
+                            initialLoc.getBlock().setType(oreType);
+                        }
+                    }else{
+                        initialLoc.getBlock().setType(oreType);
+                    }
                 }
             }
             initialLoc.setX(initialLoc.getX() + 1);
@@ -257,4 +268,85 @@ public class ChunkGeneration {
         }
     }
 
+    public void placeBorderFences(Location loc){
+        Location tempFenceLocation = loc.clone();
+        Chunk tempChunk = tempFenceLocation.getChunk();
+
+        Util.broadcast("Place fences");
+
+        if(!plugin.getChunkStorage().existsInDatabase((Integer.toString(tempChunk.getX() + 1)) + ":" + Integer.toString(tempChunk.getZ()))){
+            Util.broadcast("Place fences X + 1");
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setX(tempFenceLocation.getX() + 15);
+                tempFenceLocation.setZ(tempFenceLocation.getZ() + i + 1);
+                tempFenceLocation.getBlock().setType(Material.FENCE);
+            }
+        }else{
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setX(tempFenceLocation.getX() + 16);
+                tempFenceLocation.setZ(tempFenceLocation.getZ() + i + 1);
+                if(tempFenceLocation.getBlock().getType() == Material.FENCE && (i != 0 && i != 15)){
+                    tempFenceLocation.getBlock().setType(Material.AIR);
+                }
+            }
+        }
+
+        if(!plugin.getChunkStorage().existsInDatabase((Integer.toString(tempChunk.getX() - 1)) + ":" + Integer.toString(tempChunk.getZ()))){
+            Util.broadcast("Place fences X - 1");
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setZ(tempFenceLocation.getZ() + i + 1);
+                tempFenceLocation.getBlock().setType(Material.FENCE);
+            }
+        }else{
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setX(tempFenceLocation.getX() - 1);
+                tempFenceLocation.setZ(tempFenceLocation.getZ() + i + 1);
+                if(tempFenceLocation.getBlock().getType() == Material.FENCE && (i != 0 && i != 15)){
+                    tempFenceLocation.getBlock().setType(Material.AIR);
+                }
+            }
+        }
+
+        if(!plugin.getChunkStorage().existsInDatabase((Integer.toString(tempChunk.getX())) + ":" + Integer.toString(tempChunk.getZ() + 1))){
+            Util.broadcast("Place fences Y + 1");
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setZ(tempFenceLocation.getZ() + 15 + 1);
+                tempFenceLocation.setX(tempFenceLocation.getX() + i);
+                tempFenceLocation.getBlock().setType(Material.FENCE);
+            }
+        }else{
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setZ(tempFenceLocation.getZ() + 16 + 1);
+                tempFenceLocation.setX(tempFenceLocation.getX() + i);
+                if(tempFenceLocation.getBlock().getType() == Material.FENCE && (i != 0 && i != 15)){
+                    tempFenceLocation.getBlock().setType(Material.AIR);
+                }
+            }
+        }
+
+        if(!plugin.getChunkStorage().existsInDatabase((Integer.toString(tempChunk.getX())) + ":" + Integer.toString(tempChunk.getZ() - 1))){
+            Util.broadcast("Place fences Y - 1");
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setZ(tempFenceLocation.getZ() + 1);
+                tempFenceLocation.setX(tempFenceLocation.getX() + i);
+                tempFenceLocation.getBlock().setType(Material.FENCE);
+            }
+        }else{
+            for(int i = 0; i < 16; i++){
+                tempFenceLocation = loc.clone();
+                tempFenceLocation.setZ(tempFenceLocation.getZ() - 1 + 1);
+                tempFenceLocation.setX(tempFenceLocation.getX() + i);
+                if(tempFenceLocation.getBlock().getType() == Material.FENCE && (i != 0 && i != 15)){
+                    tempFenceLocation.getBlock().setType(Material.AIR);
+                }
+            }
+        }
+    }
 }

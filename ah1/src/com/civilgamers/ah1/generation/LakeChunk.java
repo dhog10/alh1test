@@ -37,6 +37,7 @@ public class LakeChunk extends AHChunk {
         chunkGeneration.createLake(placeLocation, lakeType, surfaceType);
         placeLocation.setY(80);
         chunkGeneration.placeTrees(placeLocation);
+        chunkGeneration.placeBorderFences(placeLocation);
 
         registerChunk();
         return true;

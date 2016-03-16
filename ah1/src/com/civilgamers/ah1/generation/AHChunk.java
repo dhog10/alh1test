@@ -24,7 +24,7 @@ public class AHChunk {
         this.plugin = plugin;
         this.player = player.getUniqueId();
         this.rand = new Random();
-        this.chunkGeneration = new ChunkGeneration();
+        this.chunkGeneration = new ChunkGeneration(plugin);
         this.ores = new HashMap<Material, Integer>();
 
         this.chunk = player.getLocation().getChunk();
